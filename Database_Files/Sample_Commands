@@ -1,0 +1,5 @@
+-- Run .sql file
+psql -U postgres -d pecdb -a -f my_script.sql
+
+-- Connect to postgres account
+sudo -u postgres -i
