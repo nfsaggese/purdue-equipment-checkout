@@ -1,6 +1,6 @@
 /*
 TO RUN
-psql -v ON_ERROR_STOP=1 -1 -h the.server.hostname -f my_script.sql the_database
+psql -U postgres -d pecdb -a -f my_script.sql
 
 */
 
