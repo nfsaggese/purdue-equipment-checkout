@@ -89,14 +89,16 @@ pool.connect(function(err, client, done) {
   if(err) {
     return console.error('error fetching client from pool', err);
   }
-  client.query('SELECT $1::int AS number', ['1'], function(err, result) {
+  //client.query("insert into equipment (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Toyota','A blue wrench');",  function(err, result) {
+      
+  client.query("delete from equipment where equipment_unique_id = 1;",  function(err, result) {
     //call `done()` to release the client back to the pool
     done();
 
     if(err) {
       return console.error('error running query', err);
     }
-    console.log(result.rows[0].number);
+    console.log(result);
     //output: 1
   });
 });
