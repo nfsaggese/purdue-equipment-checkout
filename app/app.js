@@ -68,9 +68,9 @@ app.use(function(err, req, res, next) {
 // note: all config is optional and the environment variables
 // will be read if the config is not present
 var config = {
-  user: 'foo', //env var: PGUSER
-  database: 'my_db', //env var: PGDATABASE
-  password: 'secret', //env var: PGPASSWORD
+  user: 'postgres', //env var: PGUSER
+  database: 'pecdb', //env var: PGDATABASE
+  password: 'postgres', //env var: PGPASSWORD
   host: 'localhost', // Server hosting the postgres database
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
