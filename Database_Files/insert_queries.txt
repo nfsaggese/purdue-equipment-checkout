@@ -1,0 +1,11 @@
+insert into equipment (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) 
+  values ('Blue Wrench','Wrench','Toyota','A blue wrench');
+  
+  insert into equipment (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) 
+  values ('Blue Wrench','Wrench','Toyota','A blue wrench');
+  
+  insert into users (USERS_FIRSTNAME, USERS_LASTNAME, USERS_ISADMIN, USERS_DESCRIPTION)
+  values ('Juliett','Kilo', false, 'Lima');
+  
+  insert into log (LOG_USERID, LOG_CHECKINGOUT,LOG_EQUIPMENTID, LOG_EQUIPMENTCONDITION)
+  values (1,true, 2, 5);
