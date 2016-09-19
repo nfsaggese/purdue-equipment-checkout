@@ -1,5 +1,0 @@
-select * from equipment where equipment_unique_id = (select max(equipment_unique_id) from equipment);
-select * from users;
-select * from log;
-select USERS_FIRSTNAME from users where USERS_UNIQUE_ID = 
- (select LOG_USERID from log where LOG_ENTRYID = (select LOG_ENTRYID from log where LOG_EQUIPMENTID = 2))

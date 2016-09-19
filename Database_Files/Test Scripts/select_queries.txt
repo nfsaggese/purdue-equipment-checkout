@@ -1,0 +1,22 @@
+-- get the latest equipment
+select * from equipment where equipment_unique_id = (select max(equipment_unique_id) from equipment);
+
+-- peek into all the tables
+select * from equipment
+select * from users;
+select * from log;
+
+-- see who check out equipment number 2 (not optimized)
+select USERS_FIRSTNAME from users where USERS_UNIQUE_ID = 
+ (select LOG_USERID from log where LOG_ENTRYID = (select LOG_ENTRYID from log where LOG_EQUIPMENTID = 2));
+ 
+ 
+-- see who check out equipments
+SELECT log.LOG_EQUIPMENTID, users.USERS_FIRSTNAME, users.USERS_LASTNAME
+FROM log
+INNER JOIN users
+ON users.USERS_UNIQUE_ID=log.LOG_USERID
+ORDER BY log.LOG_EQUIPMENTID;
+
+-- simple list of equipments
+select EQUIPMENT_UNIQUE_ID , EQUIPMENT_NAME from equipment order by EQUIPMENT_UNIQUE_ID;
