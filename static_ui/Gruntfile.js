@@ -6,15 +6,15 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: ['src/css/*.less'],
-        tasks: ['less:all'],
+        tasks: ['less:dev'],
       },
     },
     less: {
-      all: {
-        src: '*.less',
-        dest: '*.css',
+      dev: {
+        src: 'src/css/*.less',
+        dest: 'src/css/main.css',
         options: {
-          compress: true,
+          compress: false,
         },
       },
     },
