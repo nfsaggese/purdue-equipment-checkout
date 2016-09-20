@@ -27,7 +27,7 @@ router.get('/getDevices', function(req, res, next) {
  * LOG_ISCHECKINGOUT
  * LOG_EQUIPMENTCONDITION
  */
-router.get('/updateLog', function(req, res, next) {
+router.post('/updateLog', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -41,13 +41,58 @@ router.get('/updateLog', function(req, res, next) {
 
     console.log('userId: ' + userId + '\nequipmentId: ' + equipmentId + '\nisCheckingOut: ' +
         isCheckingOut + '\nequipmentCond: ' + equipmentCond);
-    console.log('query: ' + query);
+    console.log('update log query: ' + query);
 
     client.query(query, function(err, result) {
       res.send(JSON.stringify(result, null, 2));
       done();  
       if(err) {
         return console.error('error running query: updateLog', err);
+      }
+    });
+  });
+});
+
+//TODO
+router.get('/getLog', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var deviceName = req.query.deviceID;
+    var query = 'select * from log l inner join ';
+
+    console.log('get log query: ' + query);
+
+    client.query(query, function(err, result) {
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: updateLog', err);
+      }
+    });
+  });
+});
+
+
+router.get('/loginUser', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var user = req.query.USERS_USERNAME;
+    var password = req.query.USERS_PASSWORD;
+
+    var query = 'select * from users where USERS_USERNAME = ' + "'" + user + "'" + ' and USERS_PASSWORD = ' +
+	"'" + password + "'" + ';';
+
+    console.log(' user login query: ' + query);
+
+    client.query(query, function(err, result) {
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: verifyUser', err);
       }
     });
   });
