@@ -21,6 +21,38 @@ router.get('/getDevices', function(req, res, next) {
   });
 });
 
+/* Update log with:
+ * LOG_USERID
+ * LOG_EQUIPMENTID
+ * LOG_ISCHECKINGOUT
+ * LOG_EQUIPMENTCONDITION
+ */
+router.get('/updateLog', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var userId = req.query.LOG_USERID;
+    var equipmentId = req.query.LOG_EQUIPMENTID;
+    var isCheckingOut = req.query.LOG_ISCHECKINGOUT;
+    var equipmentCond = req.query.LOG_EQUIPMENTCONDITION;
+    var query = 'insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT, LOG_EQUIPMENTCONDITION) '
+	+ 'values (' + userId  + ',' + equipmentId + ',' + isCheckingOut + ',' + equipmentCond +');';
+
+    console.log('userId: ' + userId + '\nequipmentId: ' + equipmentId + '\nisCheckingOut: ' +
+        isCheckingOut + '\nequipmentCond: ' + equipmentCond);
+    console.log('query: ' + query);
+
+    client.query(query, function(err, result) {
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: updateLog', err);
+      }
+    });
+  });
+});
+
 router.get('/getStatistics', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
