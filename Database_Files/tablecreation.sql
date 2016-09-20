@@ -2,7 +2,6 @@
 TO RUN
 psql -U postgres -d pecdb -a -f my_script.sq
 */
-
 CREATE TABLE EQUIPMENT(
   EQUIPMENT_UNIQUE_ID serial primary key not null,
   EQUIPMENT_NAME varchar not null,
@@ -20,6 +19,15 @@ CREATE TABLE EQUIPMENT(
   USERS_LASTNAME varchar not null,
   USERS_ISADMIN boolean not null,
   USERS_DESCRIPTION varchar,
+  USERS_SCORE int default 100,
+   
+  USERS_USERNAME varchar not null,
+  USERS_PASSWORD varchar not null,
+  USERS_PHONE bigint,
+  USERS_EMAIL varchar,
+  USERS_SECRETQUESTION varchar,
+  USERS_SECRETANSWER varchar,
+   
   USERS_ENTRYUSER varchar,
   USERS_DATEADDED timestamp default current_timestamp
  );
@@ -28,18 +36,7 @@ CREATE TABLE EQUIPMENT(
    LOG_ENTRYID serial primary key not null,
    LOG_ENTRYDATE timestamp default current_timestamp,
    LOG_USERID int not null,
-   LOG_ISCHECKINGOUT boolean not null,
    LOG_EQUIPMENTID int not null,
+   LOG_ISCHECKINGOUT boolean not null,
    LOG_EQUIPMENTCONDITION int
- );
- 
- CREATE TABLE LOGIN(
-   LOGIN_ENTRYID serial primary key not null,
-   LOGIN_ENTRYDATE timestamp default current_timestamp,
-   LOGIN_USERNAME varchar not null,
-   LOGIN_PASSWORD varchar not null,
-   LOGIN_PHONE bigint,
-   LOGIN_EMAIL varchar,
-   LOGIN_SECRETQUESTION varchar,
-   LOGIN_SECRETANSWER varchar
  );
