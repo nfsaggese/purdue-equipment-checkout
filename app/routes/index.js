@@ -80,10 +80,10 @@ router.get('/loginUser', function(req, res, next) {
     if(err) {
       return console.error('error fetching client from pool', err);
     }
-    var user = req.query.USERS_USERNAME;
+    var email = req.query.USERS_EMAIL;
     var password = req.query.USERS_PASSWORD;
 
-    var query = 'select * from users where USERS_USERNAME = ' + "'" + user + "'" + ' and USERS_PASSWORD = ' +
+    var query = 'select * from users where USERS_EMAIL = ' + "'" + email + "'" + ' and USERS_PASSWORD = ' +
 	"'" + password + "'" + ';';
 
     console.log(' user login query: ' + query);
