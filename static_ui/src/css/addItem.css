@@ -1,8 +1,8 @@
-.signup ul {
+.item ul {
   padding: 0;
   margin: 0;
 }
-.signup li {
+.item li {
   display: block;
   margin: 0;
 }
@@ -11,34 +11,22 @@ label {
   color: #999;
 }
 
-.sign:before,
-.sign:after {
+.add:before,
+.add:after {
     content: "";
     display: table;
 }
 
-.sign:after {
+.add:after {
     clear: both;
 }
-.sign {
+.add {
     *zoom: 1;
 }
 :focus {
   outline: 0;
 }
-#logo-container {
-  line-height: 50px;
-  width: 40%;
-}
-#logo {
-  width: auto;
-  height: 50px;
-}
-#logo-helper {
-  font-size: 2.2rem;
-  margin-bottom: 10px;
-}
-.container{
+#body{
   position:absolute;
   margin: auto;
   left: 0;
