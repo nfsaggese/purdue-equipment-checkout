@@ -11,8 +11,7 @@
         <!-- Place favicon.ico in the root directory -->
         <link rel="stylesheet" type="text/css" href="css/skeleton.css">
         <link rel="stylesheet" href="css/main.css">
-        <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-        <script type="text/javascript" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/inventory.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -35,36 +34,22 @@
           </nav>
         </div>
         <!-- END Nav Bar -->
-        <div id="pageContent">
-          <!--Controls everything south of the nav bar -->
-          <div id="pageNavigation">
-            <!--Page Sub Navigation Goes Here-->
-          </div>
-          <div id="pageBody">
-            <!-- Page Content Goes here -->
-            <div class="container">
-              <div class="row">
-                <div class="three columns">
-                  <div class="inventoryItemContainer">
-                    <div class="inventoryItem">
-                      <div class="inventoryItemTitle">Laptop</div>
-                      <div class="inventoryItemStatusA inventoryItemShadow">Available</div>
-                      <div class="inventoryItemCheckOut inventoryItemShadow">Check Out</div>
-                      <div class="inventoryItemDetails inventoryItemShadow">View Details</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-
-          <!-- Content -->
+        <!-- Page Navigation --><!--TODO category and text search based filters -->
+        <div class="page-navigation-wrapper">
           <div class="container">
-
+            <nav class="page-navigation full-width">
+              <div id="all-inventory" class="page-navigation-tab">ALL</div>
+              <div id="available-inventory" class="page-navigation-tab">AVAILABLE</div>
+            </nav>
           </div>
-          <!-- END Nav Bar -->
-      </div>
+        <div>
+        <!-- END Nav Bar -->
+
+        <!-- Content -->
+        <div class="container">
+
+        </div>
+        <!-- END Nav Bar -->
     </body>
 </html>
