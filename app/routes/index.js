@@ -174,4 +174,46 @@ router.post('/postUpdateDeviceUser', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/getAllDevices', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment;', function(err, result) {
+      //call `done()` to release the client back to the pool
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query', err);
+      }
+    //output: 1
+    });
+  });
+});
+
+router.get('/createNewItem', function(req, res, next) {
+//insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
+    var equipmentName  = req.query.EQUIPMENT_NAME;
+    var equipmentType = req.query.EQUIPMENT_TYPE;
+    var equipmentBrand = req.query.EQUIPMENT_BRAND
+    var equipmentDesc = req.query.EQUIPMENT_DESCRIPTION;
+
+    global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;	
+    console.log(queryURL);
+    client.query(queryURL , function(err, result) {
+      //call `done()` to release the client back to the pool
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query', err);
+      }
+    //output: 1
+    });
+  });
+});
+
 module.exports = router;
