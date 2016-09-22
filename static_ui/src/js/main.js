@@ -7,12 +7,15 @@ var inventoryTabs = '<div class="page-navigation-wrapper">\
   </div>\
 <div>';
 
+var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080'
 function getAllInventory(){
   var block = '';
   var startRow = '<div class="row">' //start a row of columns
   var endRow ='</div>' //end a row
   block += '<div class="container">'//start container
-  
+  $.get(root+'/getDevices', function(data){//getDevices from the server
+    console.log(data);
+  });
   block += '</div>' //close container
   return block;
 };
@@ -23,9 +26,9 @@ $(document).ready(function(){
   $('#pageNavigation').html(inventoryTabs);
   //Swap Inventory Tabs
   $('#all-inventory').click(function(){
-    ('#pageBody').html(getAllInventory());
+    $('#pageBody').html(getAllInventory());
   });
   $('#available-inventory').click(function(){
-    ('#pageBody').html(getAvailableInventory());
+    $('#pageBody').html(getAvailableInventory());
   });
 });

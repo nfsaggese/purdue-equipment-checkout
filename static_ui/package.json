@@ -8,11 +8,12 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-connect": "^0.2.0",
     "grunt-contrib-less": "^1.4.0",
-    "grunt-contrib-watch": "^1.0.0"
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-localserver": "^1.0.19"
   }
 }
