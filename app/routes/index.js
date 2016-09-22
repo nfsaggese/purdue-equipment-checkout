@@ -74,7 +74,13 @@ router.get('/getLog', function(req, res, next) {
   });
 });
 
-
+/* 
+ * Attempts to retrieve user information given the correct
+ * user email and password. Returns no rows if incorrect.
+ * ex:
+ * ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/loginUser?USERS_EMAIL=jessica1@pecdb.com&USERS_PASSWORD=hunter2
+ * GET
+ */
 router.get('/loginUser', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
@@ -93,6 +99,60 @@ router.get('/loginUser', function(req, res, next) {
       done();  
       if(err) {
         return console.error('error running query: verifyUser', err);
+      }
+    });
+  });
+});
+
+/* 
+ * Returns equipment information given the equipment ID
+ * ex:
+ * ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/getSingleItem?EQUIPMENT_UNIQUE_ID=1
+ * GET
+ */
+router.get('/getSingleItem', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var itemID = req.query.EQUIPMENT_UNIQUE_ID;
+
+    var query = 'select * from equipment where EQUIPMENT_UNIQUE_ID = ' + itemID + ';';
+
+    console.log('single item query: ' + query);
+
+    client.query(query, function(err, result) {
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: get single item', err);
+      }
+    });
+  });
+});
+
+/* 
+ * Retires the item based on item id
+ * ex: 
+ * ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/retireItem?EQUIPMENT_UNIQUE_ID=1
+ * POST
+ */
+router.post('/retireItem', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var itemID = req.query.EQUIPMENT_UNIQUE_ID;
+
+    var query = 'UPDATE equipment SET EQUIPMENT_ISACTIVE = false WHERE equipment_unique_id = ' + itemID + ';';
+
+    console.log('retire item query: ' + query);
+
+    client.query(query, function(err, result) {
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: retire item', err);
       }
     });
   });
