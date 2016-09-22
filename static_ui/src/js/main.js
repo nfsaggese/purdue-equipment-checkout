@@ -13,8 +13,11 @@ function getAllInventory(){
   var startRow = '<div class="row">' //start a row of columns
   var endRow ='</div>' //end a row
   block += '<div class="container">'//start container
-  $.get(root+'/getDevices', function(data){//getDevices from the server
-    console.log(data);
+  var items;
+  $.get(root+'/getAllDevices', function(data){//getDevices from the server
+    //console.log(data);
+    var inventory = JSON.parse(data);
+    items = inventory['rows'];
   });
   block += '</div>' //close container
   return block;
