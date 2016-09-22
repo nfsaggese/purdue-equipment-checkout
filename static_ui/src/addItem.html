@@ -1,0 +1,60 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Purdue Electronic Checkout - Inventory</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+        <link rel="stylesheet" type="text/css" href="css/skeleton.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/addItem.css"
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!-- Nav Bar -->
+        <div class="container">
+          <nav class="u-full-width inline">
+            <div id="logo-container" class="u-pull-left flex">
+              <div><img id="logo" src="./img/logo.jpg" /></div>
+              <div id="logo-helper">Purdue Electronic Checkout</div>
+            </div>
+            <div class="u-pull-right" id="nav-button-container">
+              <div class="nav-button"><a><button>Inventory</button></a></div>
+              <div class="nav-button"><a><button>My Items</button></a></div>
+              <div id="profile-container" class="nav-button">
+                <img id="profile" src="./img/profile.jpg" />
+              </div>
+            </div>
+          </nav>
+        </div>
+        <!-- END Nav Bar -->
+
+        <!-- Page Navigation --><!--TODO category and text search based filters -->
+        <div class = "container" id="body">
+          <section class="item add">
+            <form name="addItem" action="index_submit" method="get" accept-charset="utf-8">
+              <ul>
+                <li><label for="Name">Name</label>
+                <input type="text" name="Name" placeholder="Name" required></li>
+                <li><label for="Brand">Brand</label>
+                <input type="text" name="Brand" placeholder="Brand" required></li>
+                <li><label for="Type">Type</label>
+                <input type="text" name="Type" placeholder="Type" required></li>
+                <li><label for="Type">Description</label>
+                <input type="text" name="Description" placeholder="Description" required></li>
+                <input type="submit" value="Submit Change"></li>
+                <div class="nav-button"><a href="index.html"><button>Cancel</button></a></div>
+              </ul>
+            </form>
+          </section>
+        </div>
+        <!-- END Nav Bar -->
+
+    </body>
+</html>

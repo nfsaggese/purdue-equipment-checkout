@@ -1,0 +1,38 @@
+.profile ul {
+  padding: 0;
+  margin: 0;
+}
+.profile li {
+  display: block;
+  margin: 0;
+}
+label {
+  display: block;
+  color: #999;
+}
+
+.info:before,
+.info:after {
+    content: "";
+    display: table;
+}
+
+.info:after {
+    clear: both;
+}
+.info {
+    *zoom: 1;
+}
+:focus {
+  outline: 0;
+}
+#body{
+  position:absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  display:block;
+  overflow: hidden;
+}
