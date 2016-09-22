@@ -1,0 +1,45 @@
+@import "colors.less";
+.inventoryItemContainer {
+  background-color:@clouds;
+  padding:5px;
+}
+.inventoryItem{
+  font-size:2.3rem;
+  text-align: center;
+  width:90%;
+  margin: 0 auto;
+}
+
+.inventoryItem div{
+  margin-bottom:6px;
+}
+
+.inventoryItemShadow{
+  box-shadow: 0 4px 2px -2px gray;
+  border-radius:6px;
+}
+
+.inventoryItemTitle{
+  font-size:2.9rem;
+}
+  //Available and Unavailable Indicators
+.inventoryItemStatusA{
+  background-color:@green;
+}
+.inventoryItemStatusB{
+  background-color:@red;
+}
+  //Button to Item Details
+.inventoryItemDetails{
+  background-color:@midnightBlue;
+  color:@white;
+}
+  //Checkout Button or OUt of Stock Disabled Button
+.inventoryItemCheckOut{
+  background-color:@blue;
+  color:@white;
+}
+.inventoryItemOutofStock{
+  background-color:@black;
+  color:@white;
+}
