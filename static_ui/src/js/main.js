@@ -9,13 +9,13 @@ var inventoryTabs = '<div class="page-navigation-wrapper">\
 
 var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080'
 function getAllInventory(){
-  var block = '';
+  var block = '';  console.log("We are here");
   var startRow = '<div class="row">' //start a row of columns
   var endRow ='</div>' //end a row
   block += '<div class="container">'//start container
   var items;
   $.get(root+'/getAllDevices', function(data){//getDevices from the server
-    //console.log(data);
+    console.log(data);
     var inventory = JSON.parse(data);
     items = inventory['rows'];
   });

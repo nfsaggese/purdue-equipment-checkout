@@ -36,3 +36,8 @@ label {
   display:block;
   overflow: hidden;
 }
+
+.nav-button{
+  text-align:center;
+  margin-top: -10px;
+}
