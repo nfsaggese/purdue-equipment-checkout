@@ -1,0 +1,15 @@
+get everything for one item
+
+select * from equipment where equipment_unique_id = ?;
+
+get something for all item
+
+select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment;
+
+add new item
+
+insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
+
+retire item
+
+UPDATE equipment SET EQUIPMENT_ISACTIVE = false WHERE equipment_unique_id = ?;
