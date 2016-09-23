@@ -99,7 +99,8 @@
 .page-navigation {
   justify-content: space-around;
 }
-.page-navigation-tab {
+.page-navigation-tab,
+.page-navigation-tab-active {
   width: 50%;
   text-align: center;
   color: #fff;
@@ -107,6 +108,9 @@
 }
 .page-navigation-tab:hover {
   background: #000;
+}
+.page-navigation-tab-active {
+  background: #2c3e50;
 }
 #nav-button-container {
   width: 60%;

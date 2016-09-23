@@ -43,6 +43,7 @@
           </div>
           <div id="pageBody">
             <!--Page Body Content Goes Here -->
+
           </div>
         </div>
       <script id="inventory-item-template" type="text/x-handlebars-template">
@@ -51,7 +52,7 @@
             <div class="inventoryItem" itemID="{{item.id}}">
               <div class="inventoryItemTitle">{{item.title}}</div>
               <div class="{{availability.style}} inventoryItemShadow">{{availability.text}}</div>
-              <div class="{{checkout.style}} inventoryItemShadow">{{checkout.text}}</div>
+              <div class="{{  checkout.style}} inventoryItemShadow">{{checkout.text}}</div>
               <div class="inventoryItemDetails inventoryItemShadow">View Details</div>
             </div>
           </div>
@@ -59,6 +60,29 @@
       </script>
       <script id="inventory-row-template" type="text/x-handlebars-template">
         <div id="{{id}}" class="row">
+        </div>
+      </script>
+      <script id="inventory-page-navigation-template" type="text/x-handlebars-template">
+        <div class="page-navigation-wrapper">
+          <div class="container">
+            <nav class="page-navigation full-width">
+              <div id="all-inventory" class="page-navigation-tab">ALL</div>
+              <div id="available-inventory" class="page-navigation-tab">AVAILABLE</div>
+            </nav>
+          </div>
+        <div>
+      </script>
+      <script id="view-item-details-template" type="text/x-handlebars-template">
+        <div class="container">
+          <div>
+            <div>Name: {{name}}</div>
+            <div>Type: {{type}}</div>
+            <div>Brand: {{brand}}</div>
+            <div>Description: {{description}}</div>
+            <div>Inventory: {{stock}}</div>
+            <div>Status: {{inService}}</div>
+            <div itemID="{{itemID}}" canCheckOut="{{canCheckOut}}">{{checkOut}}</div>
+          </div>
         </div>
       </script>
     </body>
