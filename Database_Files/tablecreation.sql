@@ -11,6 +11,7 @@ CREATE TABLE EQUIPMENT(
   EQUIPMENT_IMAGEURL varchar default 'http://www.drodd.com/images15/red-x4.png',
   EQUIPMENT_ISACTIVE boolean default true,
   EQUIPMENT_ISCHECKEDOUT boolean default false,
+  EQUIPMENT_CHECKEDOUTUSER varchar default 'Not Availible',
   EQUIPMENT_ENTRYUSER varchar,
   EQUIPMENT_DATEADDED timestamp default current_timestamp
  );
