@@ -1,1 +1,13 @@
-Hello World! Edit for test.
+PEC - Purdue Electronic Checkout
+
+Team members: Brian Chan, Nick Saggese, Xu Han, Do Bor Shiuan Chen,and Hongda Zeng
+
+Problem Statement: Many companies are growing their equipment libraries without an effective system of management. This is especially due to the rise of mobile devices in recent years and an urgent need to perform testing on a variety of devices.
+
+Objectives:
+-Create an application to manage a company’s equipment inventory
+-Checkin/checkout equipment.
+-Manually update checkout status.
+-View equipment library and current inventory.
+-View current and previous owner.
+-Statistical analysis.
