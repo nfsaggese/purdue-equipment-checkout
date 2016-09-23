@@ -19,7 +19,7 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <!-- Nav Bar -->
+        <!-- Global Nav Bar -->
         <div class="container">
           <nav class="u-full-width inline">
             <div id="logo-container" class="u-pull-left flex">
@@ -42,30 +42,24 @@
             <!--Page Sub Navigation Goes Here-->
           </div>
           <div id="pageBody">
-            <!-- Page Content Goes here -->
-            <div class="container">
-              <div class="row">
-                <div class="three columns">
-                  <div class="inventoryItemContainer">
-                    <div class="inventoryItem">
-                      <div class="inventoryItemTitle">Laptop</div>
-                      <div class="inventoryItemStatusA inventoryItemShadow">Available</div>
-                      <div class="inventoryItemCheckOut inventoryItemShadow">Check Out</div>
-                      <div class="inventoryItemDetails inventoryItemShadow">View Details</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <!--Page Body Content Goes Here -->
+          </div>
+        </div>
+      <script id="inventory-item-template" type="text/x-handlebars-template">
+        <div id="{{id}}" class="three columns">
+          <div class="inventoryItemContainer">
+            <div class="inventoryItem" itemID="{{item.id}}">
+              <div class="inventoryItemTitle">{{item.title}}</div>
+              <div class="{{availability.style}} inventoryItemShadow">{{availability.text}}</div>
+              <div class="{{checkout.style}} inventoryItemShadow">{{checkout.text}}</div>
+              <div class="inventoryItemDetails inventoryItemShadow">View Details</div>
             </div>
           </div>
         </div>
-
-
-          <!-- Content -->
-          <div class="container">
-
-          </div>
-          <!-- END Nav Bar -->
-      </div>
+      </script>
+      <script id="inventory-row-template" type="text/x-handlebars-template">
+        <div id="{{id}}" class="row">
+        </div>
+      </script>
     </body>
 </html>
