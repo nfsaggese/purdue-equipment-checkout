@@ -2,6 +2,8 @@
 .inventoryItemContainer {
   background-color: #ecf0f1;
   padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .inventoryItem {
   font-size: 2.3rem;
@@ -18,6 +20,7 @@
 }
 .inventoryItemTitle {
   font-size: 2.9rem;
+  height: 85px;
 }
 .inventoryItemStatusA {
   background-color: #2ecc71;
@@ -42,6 +45,8 @@
 .inventoryItemContainer {
   background-color: #ecf0f1;
   padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .inventoryItem {
   font-size: 2.3rem;
@@ -58,6 +63,7 @@
 }
 .inventoryItemTitle {
   font-size: 2.9rem;
+  height: 85px;
 }
 .inventoryItemStatusA {
   background-color: #2ecc71;
@@ -93,7 +99,8 @@
 .page-navigation {
   justify-content: space-around;
 }
-.page-navigation-tab {
+.page-navigation-tab,
+.page-navigation-tab-active {
   width: 50%;
   text-align: center;
   color: #fff;
@@ -101,6 +108,9 @@
 }
 .page-navigation-tab:hover {
   background: #000;
+}
+.page-navigation-tab-active {
+  background: #2c3e50;
 }
 #nav-button-container {
   width: 60%;

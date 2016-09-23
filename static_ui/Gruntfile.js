@@ -33,11 +33,38 @@ module.exports = function(grunt) {
         },
       },
     },
+    copy: {
+      main: {
+        files: [
+          {
+            expand:false,
+            src: ['node_modules/handlebars/dist/handlebars.min.js'],
+            dest: 'src/js/handlebars.min.js',
+            flatten: true,
+            filter: 'isFile',
+          },
+          // // includes files within path
+          // {expand: true, src: ['path/*'], dest: 'dest/', filter: 'isFile'},
+          //
+          // // includes files within path and its sub-directories
+          // {expand: true, src: ['path/**'], dest: 'dest/'},
+          //
+          // // makes all src relative to cwd
+          // {expand: true, cwd: 'path/', src: ['**'], dest: 'dest/'},
+          //
+          // // flattens results to a single level
+          // {expand: true, flatten: true, src: ['path/**'], dest: 'dest/', filter: 'isFile'},
+        ],
+      },
+    },
   });
+
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-connect');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   // Default task(s).
-  grunt.registerTask('default', ['less','connect:dev']);
+  grunt.registerTask('default', ['less', 'copy:main']);
+  grunt.registerTask('server', ['less', 'copy:main', 'connect:dev']);
 
 };
