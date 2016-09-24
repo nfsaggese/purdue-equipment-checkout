@@ -38,16 +38,37 @@ function adminActionsRegisterView(){
   $('[actionsNav="register"]').attr({"class":"page-navigation-tab-active"});
   var actionsRegisterScript = $('#admin-actions-register-template').html();
   var actionsRegisterTemplate = Handlebars.compile(actionsRegisterScript);
-  var context = {
-    target: root + '/createNewItem',
-  };
-  $('#pageBody').html(actionsRegisterTemplate(context));
+  $('#pageBody').html(actionsRegisterTemplate);
+  $('#newItem').submit(function(event){
+    event.preventDefault();
+    var equipment_name = $('input[name="EQUIPMENT_NAME"]').val();
+    var equipment_brand = $('input[name="EQUIPMENT_BRAND"]').val();
+    var equipment_type = $('input[name="EQUIPMENT_TYPE"]').val();
+    var equipment_description = $('input[name="EQUIPMENT_DESCRIPTION"]').val();
+    var url = root + "/createNewItem" + "?" + "EQUIPMENT_NAME=" + equipment_name + "&EQUIPMENT_BRAND="+equipment_brand+"&EQUIPMENT_TYPE=" +equipment_type + "&EQUIPMENT_DESCRIPTION="+equipment_description;
+    $.get(url,refreshAdminActionsRegisterView());
+  });
 
-  $('#newItem').on("submit", processRegisterForm(e));
+  function refreshAdminActionsRegisterView(){
+    alert("New Item Added to the Database!");
+    adminActionsRegisterView();
+  }
+}
+function adminActionsRetireView(){
+  $('[actionsNav="retire"]').attr({"class":"page-navigation-tab-active"});
+  var actionsRetireScript = $('#admin-actions-retire-template').html();
+  var actionsRetireTemplate = Handlebars.compile(actionsRetireScript);
+  $('#pageBody').html(actionsRetireTemplate);
+  $('#retireItem').submit(function(event){
+    event.preventDefault();
+    var equipment_unique_id = $('input[name="EQUIPMENT_UNIQUE_ID"]').val();
+    var url = root + "/retireItem" + "?" + "EQUIPMENT_UNIQUE_ID=" + equipment_unique_id;
+    $.get(url,refreshAdminActionsRetireView());
+  });
 
-  function processRegisterForm(e){
-    preventDefault();
-    alert(e);
+  function refreshAdminActionsRetireView(){
+    alert("Retired Item from Service");
+    adminActionsRetireView();
   }
 }
 
