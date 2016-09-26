@@ -9,7 +9,9 @@ $.getScript("./js/item.js", function(){
 });
 $.getScript("./js/globalNav.js", function(){
   console.log("global nav js loaded");
+  //once all calls are loaded
 });
+
 var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080'
 //todo create back and forwards variables stacks with closures to store prior and future views
 
@@ -62,12 +64,15 @@ function adminActionsRetireView(){
   $('#retireItem').submit(function(event){
     event.preventDefault();
     var equipment_unique_id = $('input[name="EQUIPMENT_UNIQUE_ID"]').val();
-    var url = root + "/retireItem" + "?" + "EQUIPMENT_UNIQUE_ID=" + equipment_unique_id;
-    $.get(url,refreshAdminActionsRetireView());
+    var data = {"EQUIPMENT_UNIQUE_ID":equipment_unique_id,};
+    data = JSON.stringify();//ready for more secure post
+    var url = root + "/retireItem?" + "EQUIPMENT_UNIQUE_ID=" + equipment_unique_id;
+    $.post(url, refreshAdminActionsRetireView(data,status));
   });
 
-  function refreshAdminActionsRetireView(){
-    alert("Retired Item from Service");
+  function refreshAdminActionsRetireView(data,status){
+
+    alert("Retired Item from Service " + status);
     adminActionsRetireView();
   }
 }
