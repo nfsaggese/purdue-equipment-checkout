@@ -38,7 +38,7 @@
         <!-- Page Navigation --><!--TODO category and text search based filters -->
         <div class = "container" id="body">
           <section class="item add">
-            <form name="addItem" method="get" accept-charset="utf-8">
+            <form name="addItem" action="index_submit" method="get" accept-charset="utf-8">
               <ul>
                 <li><label for="Name">Name</label>
                 <input type="text" name="Name" placeholder="Name" required></li>
@@ -47,14 +47,12 @@
                 <li><label for="Type">Type</label>
                 <input type="text" name="Type" placeholder="Type" required></li>
                 <li><label for="Type">Description</label>
-                <input type="text" name="Description" placeholder="Description" required></li>
-                <li>
-                <button id="submit" type="Button">Add Item</button></li>
+                <input type="text" name="Description" placeholder="Description"></li>
+                <input type="submit" value="Submit Change"></li>
+                <div class="nav-button"><a href="index.html"><button>Cancel</button></a></div>
               </ul>
             </form>
-          <div class="nav-button"><a href="index.html"><button>Cancel</button></a></div>
           </section>
-
         </div>
         <!-- END Nav Bar -->
 
