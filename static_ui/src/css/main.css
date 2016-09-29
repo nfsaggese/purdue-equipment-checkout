@@ -21,6 +21,7 @@
 .inventoryItemTitle {
   font-size: 2.9rem;
   height: 85px;
+  cursor: pointer;
 }
 .inventoryItemStatusA {
   background-color: #2ecc71;
@@ -31,10 +32,12 @@
 .inventoryItemDetails {
   background-color: #2c3e50;
   color: #fff;
+  cursor: pointer;
 }
 .inventoryItemCheckOut {
   background-color: #2980b9;
   color: #fff;
+  cursor: pointer;
 }
 .inventoryItemOutofStock {
   background-color: #000;
@@ -64,6 +67,7 @@
 .inventoryItemTitle {
   font-size: 2.9rem;
   height: 85px;
+  cursor: pointer;
 }
 .inventoryItemStatusA {
   background-color: #2ecc71;
@@ -74,10 +78,12 @@
 .inventoryItemDetails {
   background-color: #2c3e50;
   color: #fff;
+  cursor: pointer;
 }
 .inventoryItemCheckOut {
   background-color: #2980b9;
   color: #fff;
+  cursor: pointer;
 }
 .inventoryItemOutofStock {
   background-color: #000;
