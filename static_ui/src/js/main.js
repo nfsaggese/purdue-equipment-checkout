@@ -1,16 +1,16 @@
-$.getScript("./js/helper.js", function(){
-  console.log("Helper Loaded.")
-});
-$.getScript("./js/inventory.js", function(){
-  console.log("inventory Loaded.")
-});
-$.getScript("./js/item.js", function(){
-  console.log("item js loaded");
-});
-$.getScript("./js/globalNav.js", function(){
-  console.log("global nav js loaded");
-  //once all calls are loaded
-});
+// $.getScript("./js/helper.js", function(){
+//   console.log("Helper Loaded.");
+// });
+// $.getScript("./js/inventory.js", function(){
+//   console.log("inventory Loaded.");
+// });
+// $.getScript("./js/item.js", function(){
+//   console.log("item js loaded");
+// });
+// $.getScript("./js/globalNav.js", function(){
+//   console.log("global nav js loaded");
+//   //once all calls are loaded
+// });
 
 var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080'
 
@@ -79,6 +79,6 @@ function adminActionsRetireView(){
 }
 
 //init
-$(document).ready(function(){
-  userGlobalNav();
+$(document).ready(function() {
+    userGlobalNav();
 });
