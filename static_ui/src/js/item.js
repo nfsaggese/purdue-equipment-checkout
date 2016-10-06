@@ -7,7 +7,8 @@ function getSingleItem(id){
 }
 
 function displayItem(data){
-  clearPageNavigation();
+  clearBottom();
+
   var item = JSON.parse(data)['rows'][0];
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
@@ -51,12 +52,12 @@ function displayItem(data){
   var viewItemDetailsHTML = viewItemDetailsTemplate(context);
   $("#pageContent").html(viewItemDetailsHTML);
 
-  $(document).on("click",[canCheckOut='True'],function(){
+  $(document).on("click","div[canCheckOut='True']",function(){
     var id = $(this).attr("itemID");
     checkOutItem(id);
   })
 }//close displayItem()
 
-function checkoutItem(id){
+function checkOutItem(id){
   console.log("ready to checkout " + id);//setup an alert on checkout os it works on any page
 }
