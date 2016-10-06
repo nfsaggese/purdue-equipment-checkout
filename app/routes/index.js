@@ -95,7 +95,7 @@ router.get('/loginUser', function(req, res, next) {
     console.log(' user login query: ' + query);
 
     client.query(query, function(err, result) {
-      res.send(JSON.stringify(result, null, 2));
+	res.cookie('token', 'true', { maxAge: 30000}).send(JSON.stringify(result, null, 2));
       done();  
       if(err) {
         return console.error('error running query: verifyUser', err);
@@ -192,6 +192,33 @@ router.get('/getAllDevices', function(req, res, next) {
 });
 
 router.get('/createNewItem', function(req, res, next) {
+//insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
+    var equipmentName  = req.query.EQUIPMENT_NAME;
+    var equipmentType = req.query.EQUIPMENT_TYPE;
+    var equipmentBrand = req.query.EQUIPMENT_BRAND
+    var equipmentDesc = req.query.EQUIPMENT_DESCRIPTION;
+
+    global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;	
+    console.log(queryURL);
+    client.query(queryURL , function(err, result) {
+      //call `done()` to release the client back to the pool
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query', err);
+      }
+    //output: 1
+    });
+  });
+});
+/*
+ * Check in an item using itemID and userToken
+ */
+router.get('/checkInItem', function(req, res, next) {
 //insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
     var equipmentName  = req.query.EQUIPMENT_NAME;
     var equipmentType = req.query.EQUIPMENT_TYPE;
