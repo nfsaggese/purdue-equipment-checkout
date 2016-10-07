@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(function(req, res, next) {
-      res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,	Accept");
-	  next();
+  res.header("Access-Control-Allow-Origin", "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
 });
 app.use('/', routes);
 app.use('/users', users);
