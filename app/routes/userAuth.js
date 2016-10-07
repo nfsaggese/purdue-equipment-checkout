@@ -1,69 +1,79 @@
 var tokenGen = require("../utils/tokengen.js");
 
-function User(userID, ttl){
+function User(userID, timeExpire){
 	this.userID = userID;
-	this.ttl = ttl;
+	this.timeExpire = timeExpire;
 }
-
-//Token will be the key of the map
 
 var userList = {};
 
-function addUserToMap(userID, ttl){
-	var genToken = token();
-	addToNewUserList(genToken, userID, ttl);
-	return genToken;
-}
+//Token will be the key of the map
 
-function addToNewUserList(token, userID, ttl){
-	if(!checkToken(token)){
-		userList[token] = new User(userID, ttl);
-	}
-	return false
-}
+module.exports = {
 
-function removeUser(token){
-	if(checkToken(token)){
-		var userID = userList[token].userID;
-		delete userList[token];
-		return userID;
-	}
-	return false;
-}
+	addUserToMap: function(userID, ttl){
+		var genToken = tokenGen.token();
+		var currentTime = Date.now();
+		currentTime += ttl;
+		var timeExpire = new Date(currentTime);
+		this.addToNewUserList(genToken, userID, timeExpire);
+		return genToken;
+	},
 
+	addToNewUserList : function(token, userID, timeExpire){
+		if(!this.checkToken(token)){
+			userList[token] = new User(userID, timeExpire);
+		}
+		return false
+	},
 
-function checkToken(token){
-	if(userList.hasOwnProperty(token)){
-		return true;
-	} else{
+	removeUser : function (token){
+		if(this.checkToken(token)){
+			var userID = userList[token].userID;
+			delete userList[token];
+			return userID;
+		}
 		return false;
-	}
-}
+	},
 
-function checkTokenTTL(token){
-	if(checkToken(token)){
-		if(userList[token].ttl
-	}
 
-}
+	checkToken : function(token){
+		if(userList.hasOwnProperty(token)){
+			return true;
+		}
+		return false;
+	},
 
-function checkUserAlive(token){
-	if(checkToken(token) && checkTokenTTL(token)){
-		return true;
-	}
-}
+	checkTokenTTL: function(token){
+		if(this.checkToken(token)){
+			var currentTime = Date.now();
+			if(Date.compare(currentTime, userList[token].timeExpire)){
+				this.removeUser(token);
+				return false;
+			}
+			return true;
+		}
 
-function getUserID(token){
-	if(checkUserAlive){
-		var currentUserID = userList[token].userID
-		return currentUserID;
-	}else{
+	},
+
+	checkUserAlive: function(token){
+		if(this.checkToken(token) && this.checkTokenTTL(token)){
+			return true;
+		}
+		return false;
+	},
+
+	getUserID: function(token){
+		if(this.checkUserAlive(token)){
+			var currentUserID = userList[token].userID
+				return currentUserID;
+		}
 		return false;	
-	}
-}
+	},
 
-/** Checks and recycles storage space when new user is created.
-  *
-  *
-  */
+	/** Checks and recycles storage space when new user is created.
+	 *
+	 *
+	 */
 
+};

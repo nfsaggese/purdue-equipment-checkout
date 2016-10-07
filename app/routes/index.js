@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var global = require('../global.js');
+var userAuth = require('./userAuth.js');
 
 /* GET home page. */
 router.get('/getDevices', function(req, res, next) {
@@ -95,7 +96,10 @@ router.get('/loginUser', function(req, res, next) {
     console.log(' user login query: ' + query);
 
     client.query(query, function(err, result) {
-	res.cookie('token', 'true', { maxAge: 30000}).send(JSON.stringify(result, null, 2));
+	var ttl = 30000
+	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
+
+	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
       done();  
       if(err) {
         return console.error('error running query: verifyUser', err);
