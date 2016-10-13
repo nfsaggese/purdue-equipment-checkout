@@ -76,24 +76,6 @@
           </div>
         </div>
       </script>
-      <script id="user-global-navigation-template" type="text/x-handlebars-template">
-        <div class="container">
-          <nav class="u-full-width inline">
-            <div id="logo-container" class="u-pull-left flex">
-              <div><img id="logo" src="./img/logo.jpg" /></div>
-              <div id="logo-helper">Purdue Equipment Checkout</div>
-            </div>
-            <div class="u-pull-right" id="nav-button-container">
-              <!-- <div class="nav-button" userGlobalNavlistener="adminSwitch">Switch to Admin</div> -->
-              <div class="nav-button">Inventory</div>
-              <div class="nav-button">My Items</div>
-              <div id="profile-container" class="nav-button">
-                <img id="profile" src="./img/profile.jpg" />
-              </div>
-            </div>
-          </nav>
-        </div>
-      </script>
       <script id="admin-global-navigation-template" type="text/x-handlebars-template">
         <div class="container">
           <nav class="u-full-width inline">
@@ -103,9 +85,9 @@
             </div>
             <div class="u-pull-right" id="nav-button-container">
               <!-- <div class="nav-button" adminGlobalNavlistener="userSwitch">Switch to User</div> -->
-              <div class="nav-button" adminGlobalNavlistener="adminActions">Actions</div>
-              <div class="nav-button">Inventory</div>
-              <div class="nav-button">Users</div>
+              <div class="nav-button" adminGlobalNavlistener="actions">Actions</div>
+              <div class="nav-button" adminGlobalNavlistener="inventory">Inventory</div>
+              <div class="nav-button" adminGlobalNavlistener="users">Users</div>
               <div id="profile-container" class="nav-button">
                 <img id="profile" src="./img/profile.jpg" />
               </div>

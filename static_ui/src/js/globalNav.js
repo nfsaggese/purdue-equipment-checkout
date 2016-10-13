@@ -24,4 +24,13 @@ function adminGlobalNav(){
   // $(document).on("click","[adminGlobalNavListener='userSwitch']",function(){
   //   userGlobalNav();
   // });
+  $("[adminGlobalNavlistener='actions']").click(function(){
+    defaultActionsView();
+  });
+  $("[adminGlobalNavlistener='inventory']").click(function(){
+    defaultInventoryView();
+  });
+  $("[adminGlobalNavlistener='users']").click(function(){
+    defaultActionsView();
+  });
 }
