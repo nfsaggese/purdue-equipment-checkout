@@ -59,6 +59,11 @@ router.get('/getDevices', function(req, res, next) {
  * LOG_ISCHECKINGOUT
  * LOG_EQUIPMENTCONDITION
  */
+
+/* /updateLog
+ *
+ *
+ */
 router.post('/updateLog', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
@@ -85,7 +90,10 @@ router.post('/updateLog', function(req, res, next) {
   });
 });
 
-//TODO
+/* /getLog
+ * GETS the log based on the device ID 
+ *
+ */
 router.get('/getLog', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
@@ -353,6 +361,7 @@ router.get('/getAllUsers', function(req, res, next) {
   });
 });
 
+//checkinItem
 router.get('/checkinItem', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
