@@ -139,6 +139,30 @@ router.get('/loginUser', function(req, res, next) {
   });
 });
 
+//Logs in as admin
+router.get('/loginAdmin', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var email = req.query.USERS_EMAIL;
+    var password = req.query.USERS_PASSWORD;
+
+    var query = `Select USERS_UNIQUE_ID from USERS where USERS_EMAIL = '${email}' AND USERS_PASSWORD = '${password}' AND USERS_ISADMIN = true`;
+    console.log(' user login query: ' + query);
+
+    client.query(query, function(err, result) {
+	var ttl = 30000
+	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
+
+	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: verifyUser', err);
+      }
+    });
+  });
+});
 /* 
  * Returns equipment information given the equipment ID
  * ex:
@@ -275,6 +299,75 @@ router.get('/checkInItem', function(req, res, next) {
         return console.error('error running query', err);
       }
     //output: 1
+    });
+  });
+});
+
+//Get all inventory
+router.get('/allInventory', function(req, res, next){
+    global.postPool.connect(function(err, client, done) {
+    var queryURL = `Select * from EQUIPMENT`;
+
+        client.query(queryURL, function(err, result) {
+            res.send(JSON.stringify(result, null,2));
+            done();
+            if(err){
+                return console.err('error running query', err);
+            }
+        });
+    });
+});
+
+//Get all avaliable Inventory
+router.get('/allAvaliableInventory', function(req, res, next){
+    global.postPool.connect(function(err, client, done) {
+    var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false`;
+
+        client.query(queryURL, function(err, result) {
+            res.send(JSON.stringify(result, null,2));
+            done();
+            if(err){
+                return console.err('error running query', err);
+            }
+        });
+    });
+});
+
+//Get all users
+router.get('/getAllUsers', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+
+    var query = `Select USERS_UNIQUE_ID, USERS_EMAIL,  USERS_FIRSTNAME, USERS_LASTNAME, USERS_ISADMIN, USERS_DESCRIPTION from USERS ORDER BY USERS_UNIQUE_ID`;
+
+    client.query(query, function(err, result) {
+
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: verifyUser', err);
+      }
+    });
+  });
+});
+
+router.get('/checkinItem', function(req, res, next) {
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var equipmentID  = req.query.EQUIPMENT_ID;
+    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE equipment_unique_id = ${equipmentID}`;
+
+    client.query(query, function(err, result) {
+
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query: verifyUser', err);
+      }
     });
   });
 });
