@@ -6,5 +6,9 @@ var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080'
 $(document).ready(function() {
     var currentPage = window.location.pathname;
     console.log(currentPage);
-    userGlobalNav();
+    if('/index.html'){
+      userGlobalNav();
+    }else{
+      adminGlobalNav();
+    }
 });
