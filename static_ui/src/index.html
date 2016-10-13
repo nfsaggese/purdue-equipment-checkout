@@ -19,6 +19,7 @@
         <script type="text/javascript" src="./js/globalNav.js"></script>
         <script type="text/javascript" src="./js/item.js"></script>
         <script type="text/javascript" src="./js/admin.js"></script>
+        <script type="text/javascript" src="./js/user.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -85,9 +86,9 @@
             </div>
             <div class="u-pull-right" id="nav-button-container">
               <!-- <div class="nav-button" userGlobalNavlistener="adminSwitch">Switch to Admin</div> -->
-              <div class="nav-button">Inventory</div>
-              <div class="nav-button">My Items</div>
-              <div id="profile-container" class="nav-button">
+              <div userGlobalNavlistener="userInventory" class="nav-button">Inventory</div>
+              <div userGlobalNavlistener="userHistory" class="nav-button">My Items</div>
+              <div userGlobalNavlistener="userProfile" id="profile-container" class="nav-button">
                 <img id="profile" src="./img/profile.jpg" />
               </div>
             </div>

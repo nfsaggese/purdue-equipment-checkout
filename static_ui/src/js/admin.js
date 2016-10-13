@@ -1,3 +1,5 @@
+/////////////////////////////////ACTIONS
+
 function defaultActionsView(){
   adminActionsPageNav();
   adminActionsRegisterView();
@@ -19,6 +21,7 @@ function adminActionsPageNav(){
   });
 }
 
+///////////////////////REGISTER
 function adminActionsRegisterView(){
   $('[actionsNav="register"]').attr({"class":"page-navigation-tab-active"});
   var actionsRegisterScript = $('#admin-actions-register-template').html();
@@ -39,6 +42,8 @@ function adminActionsRegisterView(){
     adminActionsRegisterView();
   }
 }
+
+///////////////////////RETIRE
 function adminActionsRetireView(){
   $('[actionsNav="retire"]').attr({"class":"page-navigation-tab-active"});
   var actionsRetireScript = $('#admin-actions-retire-template').html();
@@ -59,3 +64,12 @@ function adminActionsRetireView(){
     adminActionsRetireView();
   }
 }
+
+/////////////////////INVENTORY
+function defaultAdminInventoryView(){}//TODO
+
+//////////////////////USERS
+function defaultAdminUsersView(){}//TODO
+
+/////////////////////PROFILE
+function defaultAdminProfileView(){}//TODO

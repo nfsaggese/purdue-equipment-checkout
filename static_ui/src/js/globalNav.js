@@ -11,6 +11,15 @@ function userGlobalNav(){
   var userGlobalNavigationTemplate = Handlebars.compile(userGlobalNavigationScript);
   $("#globalNavigation").html(userGlobalNavigationTemplate);
   defaultUserView();
+  $("[userGlobalNavListener='userInventory']").click(function(){
+    defaultInventoryView();
+  });
+  $("[userGlobalNavListener='userHistory']").click(function(){
+    defaultUserHistoryView();//TODO
+  });
+  $("[userGlobalNavListener='userProfile']").click(function(){
+    defaultUserProfileView();
+  });
   // $(document).on("click","[userGlobalNavListener='adminSwitch']",function(){
   //   adminGlobalNav();
   // });
@@ -28,9 +37,12 @@ function adminGlobalNav(){
     defaultActionsView();
   });
   $("[adminGlobalNavlistener='inventory']").click(function(){
-    defaultInventoryView();
+    defaultAdminInventoryView();
   });
   $("[adminGlobalNavlistener='users']").click(function(){
-    defaultActionsView();
+    defaultAdminUsersView();
+  });
+  $("[adminGlobalNavlistener='PROFILE']").click(function(){
+    defaultAdminProfileView();
   });
 }
