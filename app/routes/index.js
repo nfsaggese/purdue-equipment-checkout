@@ -3,6 +3,37 @@ var router = express.Router();
 var global = require('../global.js');
 var userAuth = require('./userAuth.js');
 
+
+router.get('/createUser', function(req, res, next) {
+    //
+    var usersFName  = req.query.USERS_FIRSTNAME;
+    var usersLName = req.query.USERS_LASTNAME;
+    var usersIsAdmin = req.query.USERS_ISADMIN;
+    var usersUserName = req.query.USERS_USERNAME;
+    var usersPassword = req.query.USERS_PASSWORD;
+    var usersEmail = req.query.USERS_EMAIL;
+
+    global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var queryURL = `insert into USERS (USERS_FIRSTNAME, USERS_LASTNAME, USERS_ISADMIN,
+    USERS_USERNAME, USERS_PASSWORD, USERS_EMAIL) values
+    ('${usersFName}','${usersLName}','${usersIsAdmin}','${usersUserName}', '${usersPassword}',
+    '${usersEmail}');`;	
+    console.log(queryURL);
+    client.query(queryURL , function(err, result) {
+      //call `done()` to release the client back to the pool
+      res.send(JSON.stringify(result, null, 2));
+      done();  
+      if(err) {
+        return console.error('error running query', err);
+      }
+    //output: 1
+    });
+  });
+});
+
 /* GET home page. */
 router.get('/getDevices', function(req, res, next) {
   //res.render('index', { title: 'Express' });
@@ -185,6 +216,7 @@ router.get('/getAllDevices', function(req, res, next) {
     }
     client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment;', function(err, result) {
       //call `done()` to release the client back to the pool
+      console.log('Cookies: ', req.cookies);
       res.send(JSON.stringify(result, null, 2));
       done();  
       if(err) {
