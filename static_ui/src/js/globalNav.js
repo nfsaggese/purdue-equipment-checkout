@@ -11,9 +11,9 @@ function userGlobalNav(){
   var userGlobalNavigationTemplate = Handlebars.compile(userGlobalNavigationScript);
   $("#globalNavigation").html(userGlobalNavigationTemplate);
   defaultUserView();
-  $(document).on("click","[userGlobalNavListener='adminSwitch']",function(){
-    adminGlobalNav();
-  });
+  // $(document).on("click","[userGlobalNavListener='adminSwitch']",function(){
+  //   adminGlobalNav();
+  // });
 }
 
 function adminGlobalNav(){
@@ -21,7 +21,7 @@ function adminGlobalNav(){
   var adminGlobalNavigationTemplate = Handlebars.compile(adminGlobalNavigationScript);
   $("#globalNavigation").html(adminGlobalNavigationTemplate);
   defaultAdminView();
-  $(document).on("click","[adminGlobalNavListener='userSwitch']",function(){
-    userGlobalNav();
-  })
+  // $(document).on("click","[adminGlobalNavListener='userSwitch']",function(){
+  //   userGlobalNav();
+  // });
 }
