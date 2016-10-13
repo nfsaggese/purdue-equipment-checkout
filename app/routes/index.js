@@ -135,10 +135,11 @@ router.get('/loginUser', function(req, res, next) {
     console.log(' user login query: ' + query);
 
     client.query(query, function(err, result) {
-	var ttl = 30000
+	var ttl = 3000
 	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
-	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
+	res.cookie('token', userToken, { maxAge: ttl}).send(JSON.stringify(result, null, 2));
+	res.end();
       done();  
       if(err) {
         return console.error('error running query: verifyUser', err);
@@ -164,6 +165,7 @@ router.get('/loginAdmin', function(req, res, next) {
 	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
 	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
+	res.end();
       done();  
       if(err) {
         return console.error('error running query: verifyUser', err);
@@ -242,6 +244,10 @@ router.post('/postUpdateDeviceUser', function(req, res, next) {
 });
 
 router.get('/getAllDevices', function(req, res, next) {
+  //console.log(req.cookies.token);
+  if(!userAuth.checkUserAlive(req.cookies.token)){
+    done();
+  }
   global.postPool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -362,7 +368,7 @@ router.get('/getAllUsers', function(req, res, next) {
 });
 
 //checkinItem
-router.get('/checkinItem', function(req, res, next) {
+router.get('/getEquipmentInfo', function(req, res, next) {
   global.postPool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
