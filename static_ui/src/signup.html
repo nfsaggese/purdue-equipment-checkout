@@ -11,6 +11,8 @@
         <!-- Place favicon.ico in the root directory -->
         <link rel="stylesheet" type="text/css" href="css/skeleton.css">
         <link rel="stylesheet" href="css/signup.css">
+        <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/sign.js"></script>
     </head>
     <body>
       <div class = "container">
@@ -20,22 +22,22 @@
           <form name="signup" action="index_submit" method="get" accept-charset="utf-8">
             <ul>
               <li><label for="usermail">First Name</label>
-              <input type="text" name="First Name" placeholder="First Name" required></li>
+              <input id="first name" type="text" name="First Name" placeholder="First Name" required></li>
               <li><label for="usermail">Last Name</label>
-              <input type="text" name="Last Name" placeholder="Last Name" required></li>
+              <input id="last name" type="text" name="Last Name" placeholder="Last Name" required></li>
               <li><label for="usermail">Phone Number</label>
-              <input type="text" name="Phone Number" placeholder="Number" required></li>
+              <input id="number" type="text" name="Phone Number" placeholder="Number" required></li>
               <li><label for="usermail">Email</label>
-              <input type="email" name="usermail" placeholder="yourname@email.com" required></li>
+              <input id="email" type="text" name="email" placeholder="youemail@email.com"></li>
               <li><label for="password">Password</label>
-              <input type="password" name="password" placeholder="Password" required></li>
+              <input id="password" type="password" name="password" placeholder="Password" required></li>
               <li><label for="password">Password</label>
-              <input type="password" name="Confirm password" placeholder="Confirm password" required></li>
+              <input id="confirm password" type="password" name="Confirm password" placeholder="Confirm password" required></li>
               <li>
-              <input type="submit" value="Create Account"></li>
-              <div class="nav-button"><a href="login.html"><button>Cancel</button></a></div>
+              <button id="submit" type="Button">Create Account</button></li>
             </ul>
           </form>
+          <div id="cancel" class="nav-button"><a href="login.html"><button>Cancel</button></a></div>
         </section>
       </div>
     </body>
