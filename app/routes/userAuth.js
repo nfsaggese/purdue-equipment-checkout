@@ -47,16 +47,18 @@ module.exports = {
 	checkTokenTTL: function(token){
 		if(this.checkToken(token)){
 			var currentTime = Date.now();
-			if(Date.compare(currentTime, userList[token].timeExpire)){
+			if(currentTime > userList[token].timeExpire){
 				this.removeUser(token);
 				return false;
 			}
 			return true;
 		}
+		return false;
 
 	},
 
 	checkUserAlive: function(token){
+		console.log(token);
 		if(this.checkToken(token) && this.checkTokenTTL(token)){
 			return true;
 		}

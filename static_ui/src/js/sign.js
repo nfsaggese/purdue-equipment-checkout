@@ -1,17 +1,21 @@
 
 function submitLogin(){
-  var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/loginUser?USERS_EMAIL="+document.getElementById("email").value+"&USERS_PASSWORD="+document.getElementById("password").value;
+  var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/createUser?USERS_FIRSTNAME="
+  + document.getElementById("first name").value + "&USERS_LASTNAME=" + document.getElementById("last name").value +
+  "&USERS_EMAIL=" + "&USERS_USERNAME" + document.getElementById("email").value + document.getElementById("email").value+
+  "&USERS_PASSWORD="+document.getElementById("password").value + "&USERS_ISADMIN=false";
 
-  $.get(theUrl, function(data){//getDevices from the server
-    console.log(data);
-    var info = JSON.parse(data);
-    number = info['rows'];
-    if(number.length == 1){
-      sessionStorage.setItem("email", document.getElementById("email").value);
+  $.ajax({
+    method: 'GET',
+    url: theUrl,
+    xhrFields: { withCredentials: true },
+    crossDomain: true,
+    success: function(data){
+      console.log(data);
       window.location = "index.html";
-    }
-    else{
-
+    },
+    error: function(){
+      console.log("Error");
     }
   });
 }

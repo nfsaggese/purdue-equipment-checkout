@@ -12,23 +12,9 @@ function submitLogin(){
       window.location = "index.html";
     },
     error: function(){
-      console.log("Error");
+      alert("Email and password combination incorrect.");
     }
   });
-/*
-  $.get(theUrl, function(data){//getDevices from the server
-    console.log(data);
-    var info = JSON.parse(data);
-    number = info['rows'];
-    if(number.length == 1){
-      sessionStorage.setItem("email", document.getElementById("email").value);
-      window.location = "index.html";
-    }
-    else{
-
-    }
-  });
-*/
 }
 
 $(document).ready(function(){
