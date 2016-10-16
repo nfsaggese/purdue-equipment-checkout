@@ -66,12 +66,18 @@ function adminActionsRetireView(){
 }
 
 /////////////////////INVENTORY
-function defaultAdminInventoryView(){
+function defaultAdminInventoryView(){//done
   adminInventoryView();
-}//TODO
+}
 
 //////////////////////USERS
-function defaultAdminUsersView(){}//TODO
+function defaultAdminUsersView(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", root+'/getAllDevices', true);
+    xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+    xhttp.withCredentials = true;
+    xhttp.send(null);
+}//TODO
 
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO
