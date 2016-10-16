@@ -2,7 +2,7 @@
 function submitLogin(){
   var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/createUser?USERS_FIRSTNAME="
   + document.getElementById("first name").value + "&USERS_LASTNAME=" + document.getElementById("last name").value +
-  "&USERS_EMAIL=" + "&USERS_USERNAME" + document.getElementById("email").value + document.getElementById("email").value+
+  "&USERS_EMAIL=" + "&USERS_USERNAME=" + document.getElementById("email").value + document.getElementById("email").value+
   "&USERS_PASSWORD="+document.getElementById("password").value + "&USERS_ISADMIN=false";
 
   $.ajax({
