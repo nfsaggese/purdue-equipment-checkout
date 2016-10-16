@@ -72,11 +72,11 @@ function defaultAdminInventoryView(){//done
 
 //////////////////////USERS
 function defaultAdminUsersView(){
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", root+'/getAllDevices', true);
-  xhttp.onload = function(e){displayInventory(xhttp.responseText)};
-  xhttp.withCredentials = true;
-  xhttp.send(null);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", root+'/getAllDevices', true);
+    xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+    xhttp.withCredentials = true;
+    xhttp.send(null);
 }//TODO
 
 /////////////////////PROFILE
