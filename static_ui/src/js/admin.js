@@ -41,7 +41,7 @@ function adminActionsRegisterView(){
     alert("New Item Added to the Database!");
     adminActionsRegisterView();
   }
-}index.html
+}
 
 ///////////////////////RETIRE
 function adminActionsRetireView(){
