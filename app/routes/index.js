@@ -158,7 +158,7 @@ router.get('/loginAdmin', function(req, res, next) {
     var password = req.query.USERS_PASSWORD;
 
     var query = `Select USERS_UNIQUE_ID from USERS where USERS_EMAIL = '${email}' AND USERS_PASSWORD = '${password}' AND USERS_ISADMIN = true`;
-    console.log(' user login query: ' + query);
+    console.loggetAllDevices,(' user login query: ' + query);
 
     client.query(query, function(err, result) {
 	var ttl = 30000
@@ -185,7 +185,7 @@ router.get('/getSingleItem', function(req, res, next) {
       return console.error('error fetching client from pool', err);
     }
     var itemID = req.query.EQUIPMENT_UNIQUE_ID;
-
+getAllDevices
     var query = 'select * from equipment where EQUIPMENT_UNIQUE_ID = ' + itemID + ';';
 
     console.log('single item query: ' + query);
@@ -333,7 +333,7 @@ router.get('/allInventory', function(req, res, next){
 });
 
 //Get all avaliable Inventory //TODO this isnt' spelled right
-router.get('/allAvaliableInventory', function(req, res, next){
+router.get('/getAvailableInventory', function(req, res, next){
     global.postPool.connect(function(err, client, done) {
     var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false`;
 
