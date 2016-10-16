@@ -54,17 +54,19 @@ function adminInventoryView(){
 
 function getAllInventory(){
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", root+'/getAllDevices', true);
+  http.open("GET", root+'/getAllDevices', true);
   xhttp.onload = function(e){displayInventory(xhttp.responseText)};
   xhttp.withCredentials = true;
-  xhttp.send(null);
+  xhttp.send(null);*/
+
 };
 
 //WANT A ROUTE THAT GET RID OF ALL RETIRED / CHECKED OUT DEVICES TODO
 function getAvailableInventory(){
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", root+'/getAllDevices', true);
+  xhttp.open("GET", root+'/getAvailableInventory', true);
   xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+  xhttp.withCredentials = true;
   xhttp.send(null);
 };
 
