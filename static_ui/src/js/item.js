@@ -59,5 +59,9 @@ function displayItem(data){
 }//close displayItem()
 
 function checkOutItem(id){
-  console.log("ready to checkout " + id);//setup an alert on checkout os it works on any page
+  var xhttp = new XMLHttpRequest();
+  http.open("GET", root+'/getAllDevices', true);
+  xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
 }

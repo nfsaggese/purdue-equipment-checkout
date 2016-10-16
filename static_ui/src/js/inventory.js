@@ -57,7 +57,7 @@ function getAllInventory(){
   http.open("GET", root+'/getAllDevices', true);
   xhttp.onload = function(e){displayInventory(xhttp.responseText)};
   xhttp.withCredentials = true;
-  xhttp.send(null);*/
+  xhttp.send(null);
 
 };
 
