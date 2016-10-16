@@ -6,6 +6,14 @@ function getSingleItem(id){
   xhttp.send(null);//only in use on post requests
 }
 
+function getItemHistory(id){
+  var xhttp = new XMLHttpRequest();
+  http.open("GET", root+'/getLog'+'?deviceID='+id, true);
+  xhttp.onload = function(e){console.log(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
+}
+
 function displayItem(data){
   clearBottom();
 
