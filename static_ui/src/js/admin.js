@@ -41,7 +41,7 @@ function adminActionsRegisterView(){
     alert("New Item Added to the Database!");
     adminActionsRegisterView();
   }
-}
+}index.html
 
 ///////////////////////RETIRE
 function adminActionsRetireView(){
@@ -67,8 +67,7 @@ function adminActionsRetireView(){
 
 /////////////////////INVENTORY
 function defaultAdminInventoryView(){
-  console.log("This is the admin inventory view.")
-  defaultInventoryView();
+  adminInventoryView();
 }//TODO
 
 //////////////////////USERS

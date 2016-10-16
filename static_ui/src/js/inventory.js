@@ -28,10 +28,35 @@ function defaultInventoryView(){
   });
 }
 
+function adminInventoryView(){
+  clearBottom();
+  var inventoryPageNavigationScript = $('#inventory-page-navigation-template').html();
+  var inventoryPageNavigationTemplate = Handlebars.compile(inventoryPageNavigationScript);
+  $('#pageNavigation').html(inventoryPageNavigationTemplate);
+  $('#pageBody').html(getAllInventory());//load all inventory by default
+  $('#all-inventory').attr({"class":"page-navigation-tab-active"})
+  $('#all-inventory').click(function(){
+    $('.page-navigation-tab-active').attr({"class":"page-navigation-tab"});
+    $('#all-inventory').attr({"class":"page-navigation-tab-active"});
+    $('#pageBody').html(getAllInventory());
+  });
+  $('#available-inventory').click(function(){
+    $('.page-navigation-tab-active').attr({"class":"page-navigation-tab"});
+    $('#available-inventory').attr({"class":"page-navigation-tab-active"});
+    $('#pageBody').html(getAvailableInventory());
+  });
+  //trigger to item details page
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){
+    var id = $(this).parent().attr("itemID");
+    getItemHistory(id);
+  });
+}
+
 function getAllInventory(){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getAllDevices', true);
   xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+  xhttp.withCredentials = true;
   xhttp.send(null);
 };
 
@@ -63,13 +88,10 @@ function displayInventory(data){//takes inventory from the api and renders to sc
       var context = {"id": row};
       var rowTemplateHTML = rowTemplate(context);
 
-      //console.log(rowTemplateHTML);
       $("#inventoryContainer").html(rowTemplateHTML);
     } else if((i % 4) == 0){
-      console.log("row printed")
       //Determining Row ID to attach to and new one to insert
       var oldRow = "#inventoryRow" + rowID.toString();
-      console.log(oldRow);
       rowID++;
       var newRow = "inventoryRow" + rowID.toString();
       itemAppendTarget = "#" + newRow; //the row where items are appended
