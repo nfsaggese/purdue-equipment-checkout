@@ -135,7 +135,7 @@ router.get('/loginUser', function(req, res, next) {
     console.log(' user login query: ' + query);
 
     client.query(query, function(err, result) {
-	var ttl = 3000
+	var ttl = 3600 * 1000;
 	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
 	res.cookie('token', userToken, { maxAge: ttl}).send(JSON.stringify(result, null, 2));
