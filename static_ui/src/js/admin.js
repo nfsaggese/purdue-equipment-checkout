@@ -66,7 +66,10 @@ function adminActionsRetireView(){
 }
 
 /////////////////////INVENTORY
-function defaultAdminInventoryView(){}//TODO
+function defaultAdminInventoryView(){
+  console.log("This is the admin inventory view.")
+  defaultInventoryView();
+}//TODO
 
 //////////////////////USERS
 function defaultAdminUsersView(){}//TODO
