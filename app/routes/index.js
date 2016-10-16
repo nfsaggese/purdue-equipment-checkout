@@ -173,34 +173,6 @@ router.get('/loginAdmin', function(req, res, next) {
     });
   });
 });
-<<<<<<< HEAD
-=======
-
-//Logs in as admin
-router.get('/loginAdmin', function(req, res, next) {
-  global.postPool.connect(function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
-    var email = req.query.USERS_EMAIL;
-    var password = req.query.USERS_PASSWORD;
-
-    var query = `Select USERS_UNIQUE_ID from USERS where USERS_EMAIL = '${email}' AND USERS_PASSWORD = '${password}' AND USERS_ISADMIN = true`;
-    console.log(' user login query: ' + query);
-
-    client.query(query, function(err, result) {
-	var ttl = 30000
-	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
-
-	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
-      done();
-      if(err) {
-        return console.error('error running query: verifyUser', err);
-      }
-    });
-  });
-});
->>>>>>> cc44923fe35fe05c8d2abd9b2fe5962c40731d74
 /*
  * Returns equipment information given the equipment ID
  * ex:
