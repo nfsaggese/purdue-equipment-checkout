@@ -20,12 +20,12 @@ router.get('/createUser', function(req, res, next) {
     var queryURL = `insert into USERS (USERS_FIRSTNAME, USERS_LASTNAME, USERS_ISADMIN,
     USERS_USERNAME, USERS_PASSWORD, USERS_EMAIL) values
     ('${usersFName}','${usersLName}','${usersIsAdmin}','${usersUserName}', '${usersPassword}',
-    '${usersEmail}');`;	
+    '${usersEmail}');`;
     console.log(queryURL);
     client.query(queryURL , function(err, result) {
       //call `done()` to release the client back to the pool
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query', err);
       }
@@ -44,7 +44,7 @@ router.get('/getDevices', function(req, res, next) {
     client.query('SELECT * FROM users;', function(err, result) {
       //call `done()` to release the client back to the pool
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query', err);
       }
@@ -82,7 +82,7 @@ router.post('/updateLog', function(req, res, next) {
 
     client.query(query, function(err, result) {
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: updateLog', err);
       }
@@ -91,7 +91,7 @@ router.post('/updateLog', function(req, res, next) {
 });
 
 /* /getLog
- * GETS the log based on the device ID 
+ * GETS the log based on the device ID
  *
  */
 router.get('/getLog', function(req, res, next) {
@@ -106,7 +106,7 @@ router.get('/getLog', function(req, res, next) {
 
     client.query(query, function(err, result) {
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: updateLog', err);
       }
@@ -114,7 +114,7 @@ router.get('/getLog', function(req, res, next) {
   });
 });
 
-/* 
+/*
  * Attempts to retrieve user information given the correct
  * user email and password. Returns no rows if incorrect.
  * ex:
@@ -140,7 +140,7 @@ router.get('/loginUser', function(req, res, next) {
 
 	res.cookie('token', userToken, { maxAge: ttl}).send(JSON.stringify(result, null, 2));
 	res.end();
-      done();  
+      done();
       if(err) {
         return console.error('error running query: verifyUser', err);
       }
@@ -166,7 +166,7 @@ router.get('/loginAdmin', function(req, res, next) {
 
 	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
 	res.end();
-      done();  
+      done();
       if(err) {
         return console.error('error running query: verifyUser', err);
       }
@@ -193,7 +193,7 @@ router.get('/loginAdmin', function(req, res, next) {
 	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
 	res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: verifyUser', err);
       }
@@ -201,7 +201,7 @@ router.get('/loginAdmin', function(req, res, next) {
   });
 });
 >>>>>>> cc44923fe35fe05c8d2abd9b2fe5962c40731d74
-/* 
+/*
  * Returns equipment information given the equipment ID
  * ex:
  * ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/getSingleItem?EQUIPMENT_UNIQUE_ID=1
@@ -220,7 +220,7 @@ router.get('/getSingleItem', function(req, res, next) {
 
     client.query(query, function(err, result) {
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: get single item', err);
       }
@@ -228,9 +228,9 @@ router.get('/getSingleItem', function(req, res, next) {
   });
 });
 
-/* 
+/*
  * Retires the item based on item id
- * ex: 
+ * ex:
  * ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/retireItem?EQUIPMENT_UNIQUE_ID=1
  * POST
  */
@@ -247,7 +247,7 @@ router.post('/retireItem', function(req, res, next) {
 
     client.query(query, function(err, result) {
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: retire item', err);
       }
@@ -284,7 +284,7 @@ router.get('/getAllDevices', function(req, res, next) {
       //call `done()` to release the client back to the pool
       console.log('Cookies: ', req.cookies);
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query', err);
       }
@@ -304,12 +304,12 @@ router.get('/createNewItem', function(req, res, next) {
     if(err) {
       return console.error('error fetching client from pool', err);
     }
-    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;	
+    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;
     console.log(queryURL);
     client.query(queryURL , function(err, result) {
       //call `done()` to release the client back to the pool
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query', err);
       }
@@ -331,12 +331,12 @@ router.get('/checkInItem', function(req, res, next) {
     if(err) {
       return console.error('error fetching client from pool', err);
     }
-    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;	
+    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;
     console.log(queryURL);
     client.query(queryURL , function(err, result) {
       //call `done()` to release the client back to the pool
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query', err);
       }
@@ -360,7 +360,7 @@ router.get('/allInventory', function(req, res, next){
     });
 });
 
-//Get all avaliable Inventory
+//Get all avaliable Inventory //TODO this isnt' spelled right
 router.get('/allAvaliableInventory', function(req, res, next){
     global.postPool.connect(function(err, client, done) {
     var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false`;
@@ -387,7 +387,7 @@ router.get('/getAllUsers', function(req, res, next) {
     client.query(query, function(err, result) {
 
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: verifyUser', err);
       }
@@ -407,7 +407,7 @@ router.get('/getEquipmentInfo', function(req, res, next) {
     client.query(query, function(err, result) {
 
       res.send(JSON.stringify(result, null, 2));
-      done();  
+      done();
       if(err) {
         return console.error('error running query: verifyUser', err);
       }
