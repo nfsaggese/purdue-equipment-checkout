@@ -34,6 +34,25 @@ router.get('/createUser', function(req, res, next) {
   });
 });
 
+router.get('/getUserInfo', function(req, res, next) {
+  //res.render('index', { title: 'Express' });
+  global.postPool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    var email = req.query.USERS_EMAIL;
+    client.query("SELECT * FROM users where users_email='" + email + "';", function(err, result) {
+      //call `done()` to release the client back to the pool
+      res.send(JSON.stringify(result, null, 2));
+      done();
+      if(err) {
+        return console.error('error running query', err);
+      }
+    //output: 1
+    });
+  });
+});
+
 /* GET home page. */
 router.get('/getDevices', function(req, res, next) {
   //res.render('index', { title: 'Express' });
@@ -135,7 +154,7 @@ router.get('/loginUser', function(req, res, next) {
     console.log(' user login query: ' + query);
 
     client.query(query, function(err, result) {
-	var ttl = 3000
+	var ttl = 3600 * 1000;
 	var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
 	res.cookie('token', userToken, { maxAge: ttl}).send(JSON.stringify(result, null, 2));
