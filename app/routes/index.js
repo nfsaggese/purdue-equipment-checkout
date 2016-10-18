@@ -44,8 +44,7 @@ router.get('/getUserInfo', function(req, res, next) {
 		done();
 	    }
 	    console.log(req.cookies.token);
-	    var email = userAuth.getUserID(req.cookies.token);
-	    console.log(id);
+	    var id = userAuth.getUserID(req.cookies.token);
 	    client.query("SELECT * FROM users where users_unique_id='" + id + "';", function(err, result) {
 		//call `done()` to release the client back to the pool
 		res.send(JSON.stringify(result, null, 2));
