@@ -43,7 +43,9 @@ router.get('/getUserInfo', function(req, res, next) {
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
 		done();
 	    }
+	    console.log(req.cookies.token);
 	    var email = userAuth.getUserID(req.cookies.token);
+	    console.log(email);
 	    client.query("SELECT * FROM users where users_email='" + email + "';", function(err, result) {
 		//call `done()` to release the client back to the pool
 		res.send(JSON.stringify(result, null, 2));
@@ -121,8 +123,11 @@ router.get('/getLog', function(req, res, next) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		done();
+	    }
 	    var deviceName = req.query.deviceID;
-	    var query = 'select * from log l inner join ';
+	    var query = `Select * from log where LOG_USERID = '${userName}' order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
