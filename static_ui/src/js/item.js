@@ -15,6 +15,7 @@ function getItemHistory(id){//TODO WORKING ON THIS
 }
 
 function displayItem(data){
+  console.log('display item');
   clearBottom();
   clearGlobalNavigation();
   userGlobalNav();//testing for bug with global nav
