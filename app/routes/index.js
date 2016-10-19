@@ -112,6 +112,30 @@ router.post('/updateLog', function(req, res, next) {
 		});
 	});
 });
+router.get('/getUpdateUser', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		done();
+	    }
+	    var fName = req.query.USERS_FIRSTNAME;
+	    var lName = req.query.USERS_LASTNAME;
+	    var email = req.query.USERS_EMAIL;
+	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = '${deviceID}' order by LOG_ENTRYID;`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
 
 /* /getLog
  * GETS the log based on the device ID
@@ -183,6 +207,13 @@ router.get('/loginUser', function(req, res, next) {
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
+		if (result.rows.length == 0) {
+		    res.status(401);
+		    res.send('Invalid email or password');
+		    done();
+
+		    return;
+		}
 		var ttl = 3600 * 1000;
 		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
 
