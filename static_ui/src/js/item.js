@@ -6,7 +6,7 @@ function getSingleItem(id){
   xhttp.send(null);//only in use on post requests
 }
 
-function getItemHistory(id){
+function getItemHistory(id){//TODO WORKING ON THIS
   var xhttp = new XMLHttpRequest();
   http.open("GET", root+'/getLog'+'?deviceID='+id, true);
   xhttp.onload = function(e){console.log(xhttp.responseText)};

@@ -13,3 +13,13 @@ $(document).ready(function() {
       adminGlobalNav();
     }
 });
+
+/* todo
+
+- Checkout items in user
+-view item history from admin inventory views
+-user/admin profile integration
+-check for valid cookie else redirect
+-admin users view -> view user history
+
+*/
