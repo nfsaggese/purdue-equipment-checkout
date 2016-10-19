@@ -125,7 +125,7 @@ router.get('/logoutUser', function(req, res, next) {
 	    done();
 	});
 
-router.get('/getUpdateUser', function(req, res, next) {
+router.get('/updateUser', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
@@ -136,8 +136,12 @@ router.get('/getUpdateUser', function(req, res, next) {
 	    var fName = req.query.USERS_FIRSTNAME;
 	    var lName = req.query.USERS_LASTNAME;
 	    var email = req.query.USERS_EMAIL;
-	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = '${deviceID}' order by LOG_ENTRYID;`;
+	    var password = req.query.USERS_PASSWORD;
+	    var phone = req.query.USERS_PHONE;
+	    var userID = userAuth.getUserID(req.cookies.token);
 
+	    var query = `UPDATE users SET (USERS_FIRSTNAME, USERS_LASTNAME, USERS_EMAIL, USERS_PASSWORD, USERS_PHONE) = ('${fName}', '${lName}', '${email}', '${password}','${phone}') WHERE users_unique_id = '${userID}';`;
+	    
 	    console.log('get log query: ' + query);
 
 	    client.query(query, function(err, result) {
