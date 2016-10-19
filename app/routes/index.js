@@ -113,6 +113,16 @@ router.post('/updateLog', function(req, res, next) {
 	});
 });
 
+router.get('/validCookie', function(req, res, next) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('false');
+		done();
+
+		return;
+	    }
+	    res.send('true');
+	    done();
+	});
 router.get('/logoutUser', function(req, res, next) {
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
 		res.send('cookie expired');
