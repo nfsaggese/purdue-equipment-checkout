@@ -68,8 +68,8 @@ function displayItem(data){
 
 function checkOutItem(id){
   var xhttp = new XMLHttpRequest();
-  http.open("GET", root+'/getAllDevices', true);
-  xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+  http.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
+  xhttp.onload = function(e){alert(xhttp.responseText)};
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
