@@ -22,7 +22,7 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   });
-  $(document).on("click",".inventoryItemCheckout", function(){
+  $(document).on("click",".inventoryItemCheckOut", function(){
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   });
