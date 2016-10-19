@@ -3,7 +3,7 @@ function getSingleItem(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root + '/getSingleItem' + params, true);
   xhttp.onload = function(e){displayItem(xhttp.responseText)};
-  xhttp.send(null);//only in use on post requests
+  xhttp.send(null);//dmin.htmlonly in use on post requests
 }
 
 function getItemHistory(id){//TODO WORKING ON THIS
