@@ -117,7 +117,7 @@ router.post('/updateLog', function(req, res, next) {
  * GETS the log based on the device ID
  *
  */
-router.get('/getLog', function(req, res, next) {
+router.get('/getDeviceLog', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
@@ -125,8 +125,8 @@ router.get('/getLog', function(req, res, next) {
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
 		done();
 	    }
-	    var deviceName = req.query.deviceID;
-	    var query = `Select * from log where LOG_USERID = '${userName}' order by LOG_ENTRYID;`;
+	    var deviceID = req.query.deviceID;
+	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = '${deviceID}' order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
@@ -140,6 +140,28 @@ router.get('/getLog', function(req, res, next) {
 	    });
 	});
 
+router.get('/getUserLog', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		done();
+	    }
+	    var userID = userAuth.getUserID(req.cookies.token);
+	    var query = `Select * from log where LOG_USERID = '${userID}' order by LOG_ENTRYID;`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
 /*
  * Attempts to retrieve user information given the correct
  * user email and password. Returns no rows if incorrect.
@@ -174,7 +196,7 @@ router.get('/loginUser', function(req, res, next) {
 	});
 });
 
-router.get('/checkoutItem', function(req, res, next) {
+router.get('/checkOutItem', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
@@ -341,7 +363,7 @@ router.get('/createNewItem', function(req, res, next) {
 /*
  * Check in an item using itemID and userToken
  */
-router.get('/checkInItem', function(req, res, next) {
+/*router.get('/checkInItem', function(req, res, next) {
 	//insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
 	if(!userAuth.checkUserAlive(req.cookies.token)){
 	    done();
@@ -367,6 +389,31 @@ router.get('/checkInItem', function(req, res, next) {
 		//output: 1
 		});
 	    });
+});*/
+router.get('/checkInItem', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		done();
+	    }
+	    var equipmentID = req.query.EQUIPMENT_ID;
+	    var userID = userAuth.getUserID(req.cookies.token);
+	    var condition = req.query.EQUIPMENT_CONDITION;
+
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
+	    equipment_unique_id = '${equipmentID}'; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values ('${userID}', '${equipmentID}', false, '${condition}');`;
+	    console.log(' user login query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: verifyUser', err);
+		}
+		});
+	});
 });
 
 //Get all inventory
