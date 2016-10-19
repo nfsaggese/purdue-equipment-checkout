@@ -64,7 +64,7 @@ function displayItem(data){
   $(document).on("click","div[canCheckOut='True']",function(){
     var id = $(this).attr("itemID");
     checkOutItem(id);
-  })
+  });
 }//close displayItem()
 
 function checkOutItem(id){
