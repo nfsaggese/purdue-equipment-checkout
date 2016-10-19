@@ -27,6 +27,7 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   });
+  console.log('default inventory view end');
 }
 
 function adminInventoryView(){
