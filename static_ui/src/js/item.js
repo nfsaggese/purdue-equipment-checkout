@@ -16,8 +16,7 @@ function getItemHistory(id){//TODO WORKING ON THIS
 
 function displayItem(data){
   console.log('display item');
-  clearGlobalNavigation();
-  userGlobalNav();//testing for bug with global nav
+  clearBottom();
   var item = JSON.parse(data)['rows'][0];
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
