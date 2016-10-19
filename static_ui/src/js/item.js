@@ -8,7 +8,7 @@ function getSingleItem(id){
 
 function getItemHistory(id){//TODO WORKING ON THIS
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", root+'/getLog'+'?deviceID='+id, true);
+  xhttp.open("GET", root+'/getDeviceLog'+'?deviceID='+id, true);
   xhttp.onload = function(e){console.log(xhttp.responseText)};
   xhttp.withCredentials = true;
   xhttp.send(null);
