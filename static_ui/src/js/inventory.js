@@ -24,7 +24,7 @@ function defaultInventoryView(){
   });
   $(document).on("click",".inventoryItemCheckout", function(){
     var id = $(this).parent().attr("itemID");
-    checkoutItem(id);
+    checkOutItem(id);
   });
 }
 
