@@ -1,6 +1,7 @@
 //Inventory
 function defaultInventoryView(){
   //default content
+  console.log('default inventory view');
   clearBottom();
   var inventoryPageNavigationScript = $('#inventory-page-navigation-template').html();
   var inventoryPageNavigationTemplate = Handlebars.compile(inventoryPageNavigationScript);

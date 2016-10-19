@@ -70,7 +70,12 @@ function displayItem(data){
 function checkOutItem(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
-  xhttp.onload = function(e){alert(xhttp.responseText)};
+  xhttp.onload = function(e){postCheckOut(xhttp.responseText,id)};
   xhttp.withCredentials = true;
   xhttp.send(null);
+}
+function postCheckOut(data,id){
+  console.log("Check Out Response" + string(data));
+  alert('Item checked out.');
+  getSingleItem(id);
 }
