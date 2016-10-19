@@ -140,7 +140,7 @@ router.get('/updateUser', function(req, res, next) {
 	    var phone = req.query.USERS_PHONE;
 	    var userID = userAuth.getUserID(req.cookies.token);
 
-	    var query = `UPDATE users SET (USERS_FIRSTNAME, USERS_LASTNAME, USERS_EMAIL, USERS_PASSWORD, USERS_PHONE) = ('${fName}', '${lName}', '${email}', '${password}','${phone}') WHERE users_unique_id = '${userID}';`;
+	    var query = `UPDATE users SET (USERS_FIRSTNAME, USERS_LASTNAME, USERS_EMAIL, USERS_PASSWORD, USERS_PHONE) = ('${fName}', '${lName}', '${email}', '${password}','${phone}') WHERE users_unique_id = ${userID};`;
 	    
 	    console.log('get log query: ' + query);
 
@@ -167,7 +167,7 @@ router.get('/getDeviceLog', function(req, res, next) {
 		done();
 	    }
 	    var deviceID = req.query.deviceID;
-	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = '${deviceID}' order by LOG_ENTRYID;`;
+	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = ${deviceID} order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
@@ -190,7 +190,7 @@ router.get('/getUserLog', function(req, res, next) {
 		done();
 	    }
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var query = `Select * from log where LOG_USERID = '${userID}' order by LOG_ENTRYID;`;
+	    var query = `Select * from log where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
@@ -451,7 +451,7 @@ router.get('/checkInItem', function(req, res, next) {
 	    var condition = req.query.EQUIPMENT_CONDITION;
 
 	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
-	    equipment_unique_id = '${equipmentID}'; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values ('${userID}', '${equipmentID}', false, '${condition}');`;
+	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false, '${condition}');`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
