@@ -256,7 +256,7 @@ router.get('/checkOutItem', function(req, res, next) {
 	    var userID = userAuth.getUserID(req.cookies.token);
 	    var condition = req.query.EQUIPMENT_CONDITION;
 
-	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = '${equipmentID}'; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values ('${userID}', '${equipmentID}', true, '${condition}');`;
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, true, '${condition}');`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
