@@ -75,7 +75,7 @@ function checkOutItem(id){
   xhttp.send(null);
 }
 function postCheckOut(data,id){
-  console.log("Check Out Response" + string(data));
+  console.log("Check Out Response" + String(data));
   alert('Item checked out.');
   getSingleItem(id);
 }
