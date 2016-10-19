@@ -12,6 +12,7 @@ function userGlobalNav(){
   $("#globalNavigation").html(userGlobalNavigationTemplate);
   defaultUserView();
   $("[userGlobalNavListener='userInventory']").click(function(){
+    console.log('navigating to inventory view');
     defaultInventoryView();
   });
   $("[userGlobalNavListener='userHistory']").click(function(){

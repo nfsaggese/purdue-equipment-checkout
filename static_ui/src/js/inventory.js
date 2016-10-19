@@ -1,6 +1,7 @@
 //Inventory
 function defaultInventoryView(){
   //default content
+  console.log('default inventory view');
   clearBottom();
   var inventoryPageNavigationScript = $('#inventory-page-navigation-template').html();
   var inventoryPageNavigationTemplate = Handlebars.compile(inventoryPageNavigationScript);
@@ -22,10 +23,11 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   });
-  $(document).on("click",".inventoryItemCheckout", function(){
+  $(document).on("click",".inventoryItemCheckOut", function(){
     var id = $(this).parent().attr("itemID");
-    checkoutItem(id);
+    checkOutItem(id);
   });
+  console.log('default inventory view end');
 }
 
 function adminInventoryView(){
