@@ -112,6 +112,19 @@ router.post('/updateLog', function(req, res, next) {
 		});
 	});
 });
+
+router.get('/logoutUser', function(req, res, next) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('cookie expired');
+		done();
+
+		return;
+	    }
+	    res.clearCookie('token');
+	    res.send('success');
+	    done();
+	});
+
 router.get('/getUpdateUser', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
