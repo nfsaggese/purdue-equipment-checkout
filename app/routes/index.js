@@ -167,7 +167,7 @@ router.get('/getDeviceLog', function(req, res, next) {
 		done();
 	    }
 	    var deviceID = req.query.deviceID;
-	    var query = `Select * from log where EQUIPMENT_UNIQUE_ID = ${deviceID} order by LOG_ENTRYID;`;
+	    var query = `Select * from log where LOG_EQUIPMENTID = ${deviceID} order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
@@ -254,9 +254,8 @@ router.get('/checkOutItem', function(req, res, next) {
 	    }
 	    var equipmentID = req.query.EQUIPMENT_ID;
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var condition = req.query.EQUIPMENT_CONDITION;
 
-	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, true, '${condition}');`;
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT) values (${userID}, ${equipmentID}, true);`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
@@ -448,10 +447,9 @@ router.get('/checkInItem', function(req, res, next) {
 	    }
 	    var equipmentID = req.query.EQUIPMENT_ID;
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var condition = req.query.EQUIPMENT_CONDITION;
 
 	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
-	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false, '${condition}');`;
+	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false);`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
