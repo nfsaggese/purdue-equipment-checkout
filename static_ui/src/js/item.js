@@ -16,7 +16,6 @@ function getItemHistory(id){//TODO WORKING ON THIS
 
 function displayItem(data){
   console.log('display item');
-  clearBottom();
   clearGlobalNavigation();
   userGlobalNav();//testing for bug with global nav
   var item = JSON.parse(data)['rows'][0];
@@ -60,7 +59,7 @@ function displayItem(data){
     checkOut: checkOut,
   };//close contex
   var viewItemDetailsHTML = viewItemDetailsTemplate(context);
-  $("#pageContent").html(viewItemDetailsHTML);
+  $("#pageBody").html(viewItemDetailsHTML);
 
   $(document).on("click","div[canCheckOut='True']",function(){
     var id = $(this).attr("itemID");
