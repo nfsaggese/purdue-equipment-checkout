@@ -74,10 +74,30 @@ function defaultAdminInventoryView(){//done
 function defaultAdminUsersView(){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", root+'/getAllUsers', true);
-    xhttp.onload = function(e){console.log(xhttp.responseText)};
+    xhttp.onload = function(e){displayAllUsers(xhttp.responseText)};
     xhttp.withCredentials = true;
     xhttp.send(null);
-}//TODO
+}
+function displayAllUsers(data){
+  clearBottom();
+  var adminUsersTemplate = Handlebars.compile($('#admin-users-template').html());
+  $('#pageBody').html(adminUsersTemplate);
+  //built container now need rows
+  var users = data['rows'];
+  var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-individual-tempalate').html());
 
+  for(var i = 0; i < users.length; i++){
+    var context = {
+      id: users[i]['users_unique_id'],
+      email: users[i]['users_email'],
+      first: users[i]['users_firstname'],
+      last: users[i]['users_lastname'],
+      admin: users[i]['users_isadmin'],
+    }
+    $('#containerTarget').append(adminUserIndividualTemplate(context));
+  }
+  //view details listener //maybe need seperate thing for admins
+  $('div[fieldcontent="viewdetails"]').click(getUserLog($(this).parent().attr("userid")));
+}
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO

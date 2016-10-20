@@ -123,7 +123,17 @@
         </div>
       </script>
       <script id="admin-users-template" type="text/x-handlebars-template">
-        //<!-- TODO -->
+        <div id="containerTarget" class="container">
+        </div>
+      </script>
+      <script id="admin-users-individual-template" type="text/x-handlebars-template">
+        <div class="row" userid="{{id}}">
+          <div fieldcontent="email">{{email}}</div>
+          <div fieldcontent="first">{{first}}</div>
+          <div fieldcontent="last">{{last}}</div>
+          <div fieldcontent="admin">{{admin}}</div>
+          <div fieldcontent="viewdetails">View Details</div>
+        </div>
       </script>
       <script src="./js/handlebars.min.js" type="text/javascript"></script>
       <script type="text/javascript" src="./js/main.js"></script>
