@@ -84,6 +84,7 @@ function displayAllUsers(data){
   $('#pageBody').html(adminUsersTemplate);
   //built container now need rows
   var users = data['rows'];
+  console.log(users);
   var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-individual-template').html());
 
   for(var i = 0; i < users.length; i++){
