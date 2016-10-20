@@ -104,7 +104,7 @@ function displayAllUsers(data){
 var adUsDetails = function adminUserDetailsListener(){
   var id = $(this).parent().attr("userid");
   getAdminUserLog(id);
-}
+};
 function getAdminUserLog(id){//TODO
   //var id = $(selector).parent().attr("userid");
   var xhttp = new XMLHttpRequest();
