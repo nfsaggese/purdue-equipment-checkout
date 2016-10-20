@@ -11,6 +11,8 @@
         <!-- Place favicon.ico in the root directory -->
         <link rel="stylesheet" type="text/css" href="css/skeleton.css">
         <link rel="stylesheet" href="css/profile.css">
+        <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+        <script type="text/javascript" src="js/profile.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -23,14 +25,14 @@
             <form name="personal info" action="index_submit" method="get" accept-charset="utf-8">
               <ul>
                 <li><label for="firstName">First Name</label>
-                <input type="text" name="First Name" placeholder="First Name" required></li>
+                <input type="text" id="fname" name="FirstName" placeholder="First Name" required></li>
                 <li><label for="lastName">Last Name</label>
-                <input type="text" name="Last Name" placeholder="Last Name" required></li>
+                <input type="text" id="lname" name="LastName" placeholder="Last Name" required></li>
                 <li><label for="phoneNumber">Phone Number</label>
-                <input type="text" name="Phone Number" placeholder="Number" required></li>
+                <input type="text" id="phone" name="PhoneNumber" placeholder="Number" required></li>
                 <li><label for="email">Email</label>
-                <input type="text" name="usermail" placeholder="yourname@email.com" required></li>
-                <input type="submit" value="Submit Change"></li>
+                <input type="text" id="email" name="usermail" placeholder="yourname@email.com" required></li>
+                <button id="submit" type="Button">Update Info</button></li>
               </ul>
             </form>
             <div class="nav-button"><a href="index.html"><button>Cancel</button></a></div>
