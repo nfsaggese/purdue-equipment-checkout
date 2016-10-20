@@ -44,7 +44,7 @@ function submitChange(){
   });
 }
 
-function cancel{
+function cancel(){
   if(isAdmin === true){
       window.location = "admin.html";
   }else{
