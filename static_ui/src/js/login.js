@@ -9,7 +9,12 @@ function submitLogin(){
     crossDomain: true,
     success: function(data){
       console.log(data);
-      window.location = "user.html";
+      var isAdmin=JSON.parse(data).rows[0].users_isadmin;
+      if(isAdmin === true){
+          window.location = "admin.html";
+      }else{
+          window.location = "user.html";
+      }
     },
     error: function(){
       alert("Email and password combination incorrect.");
