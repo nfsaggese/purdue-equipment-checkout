@@ -23,6 +23,7 @@ function displayItem(data){
   clearBottom();
   var item = JSON.parse(data);
   item = ['rows'][0];
+  console.log(item);
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
   var viewItemDetailsTemplate = Handlebars.compile(viewItemDetailsScript);
