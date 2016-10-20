@@ -174,7 +174,9 @@ router.get('/getDeviceLog', function(req, res, next) {
 	    return console.error('error fetching client from pool', err);
 	    }
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
 		done();
+		return;
 	    }
 	    var deviceID = req.query.deviceID;
 	    var query = `Select * from log where LOG_EQUIPMENTID = ${deviceID} order by LOG_ENTRYID;`;
@@ -191,6 +193,30 @@ router.get('/getDeviceLog', function(req, res, next) {
 	    });
 	});
 
+router.get('/getUserAdminLog', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var userID = req.query.USERID;
+	    var query = `Select * from log where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
 router.get('/getUserLog', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
