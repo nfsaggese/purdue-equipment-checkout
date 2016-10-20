@@ -9,7 +9,7 @@ function submitLogin(){
     crossDomain: true,
     success: function(data){
       console.log(data);
-      window.location = "index.html";
+      window.location = "user.html";
     },
     error: function(){
       alert("Email and password combination incorrect.");
