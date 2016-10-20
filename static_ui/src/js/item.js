@@ -22,7 +22,7 @@ function displayItem(data){
   console.log('display item');
   clearBottom();
   var item = JSON.parse(data);
-  item = ['rows'][0];
+  item = item['rows'][0];
   console.log(item);
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
