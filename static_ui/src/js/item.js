@@ -21,7 +21,8 @@ function displayItemHistory(data){
 function displayItem(data){
   console.log('display item');
   clearBottom();
-  var item = JSON.parse(data)['rows'][0];
+  var item = JSON.parse(data);
+  item = ['rows'][0;
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
   var viewItemDetailsTemplate = Handlebars.compile(viewItemDetailsScript);
