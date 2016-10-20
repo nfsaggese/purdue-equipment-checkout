@@ -107,7 +107,6 @@ var adUsDetails = function adminUserDetailsListener(){
 }
 function getAdminUserLog(id){//TODO
   //var id = $(selector).parent().attr("userid");
-  console.log(id);
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getUserAdminLog?USERID='+id, true);
   xhttp.onload = function(e){displayAdminUserLog(xhttp.responseText)};
@@ -117,7 +116,8 @@ function getAdminUserLog(id){//TODO
 function displayAdminUserLog(data){
   data = JSON.parse(data);
   var userData = data['rows'];
-  
+  console.log(userData);
+
 }
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO
