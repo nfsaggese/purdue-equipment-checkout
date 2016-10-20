@@ -116,7 +116,8 @@ function getAdminUserLog(id){//TODO
 }
 function displayAdminUserLog(data){
   data = JSON.parse(data);
-  console.log(data);
+  var userData = data['rows'];
+  
 }
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO
