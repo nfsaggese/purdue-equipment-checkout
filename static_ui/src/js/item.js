@@ -3,6 +3,7 @@ function getSingleItem(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root + '/getSingleItem' + params, true);
   xhttp.onload = function(e){displayItem(xhttp.responseText)};
+  xhttp.withCredentials = true;
   xhttp.send(null);//dmin.htmlonly in use on post requests
 }
 
@@ -20,7 +21,9 @@ function displayItemHistory(data){
 function displayItem(data){
   console.log('display item');
   clearBottom();
-  var item = JSON.parse(data)['rows'][0];
+  var item = JSON.parse(data);
+  item = item['rows'][0];
+  console.log(item);
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
   var viewItemDetailsTemplate = Handlebars.compile(viewItemDetailsScript);

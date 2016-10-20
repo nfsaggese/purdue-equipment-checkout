@@ -279,7 +279,7 @@ router.get('/loginUser', function(req, res, next) {
 		    return;
 		}
 		var ttl = 3600 * 1000;
-		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
+		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl, result.rows[0].users_isadmin);
 
 		res.cookie('token', userToken, { maxAge: ttl}).send(JSON.stringify(result, null, 2));
 		res.end();
@@ -330,8 +330,7 @@ router.get('/loginAdmin', function(req, res, next) {
 
 	    client.query(query, function(err, result) {
 		var ttl = 30000
-		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl);
-
+		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl, result.rows[0].users_isadmin);
 		res.cookie('token', userToken, { maxAge: 30000}).send(JSON.stringify(result, null, 2));
 		res.end();
 		done();

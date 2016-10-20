@@ -1,8 +1,9 @@
 var tokenGen = require("../utils/tokengen.js");
 
-function User(userID, timeExpire){
+function User(userID, timeExpire, isAdmin){
 	this.userID = userID;
 	this.timeExpire = timeExpire;
+	this.isAdmin = isAdmin;
 }
 
 var userList = {};
@@ -11,18 +12,18 @@ var userList = {};
 
 module.exports = {
 
-	addUserToMap: function(userID, ttl){
+	addUserToMap: function(userID, ttl, isAdmin){
 		var genToken = tokenGen.token();
 		var currentTime = Date.now();
 		currentTime += ttl;
 		var timeExpire = new Date(currentTime);
-		this.addToNewUserList(genToken, userID, timeExpire);
+		this.addToNewUserList(genToken, userID, timeExpire, isAdmin);
 		return genToken;
 	},
 
-	addToNewUserList : function(token, userID, timeExpire){
+	addToNewUserList : function(token, userID, timeExpire, isAdmin){
 		if(!this.checkToken(token)){
-			userList[token] = new User(userID, timeExpire);
+			userList[token] = new User(userID, timeExpire, isAdmin);
 		}
 		return false
 	},
@@ -62,6 +63,13 @@ module.exports = {
 		if(this.checkToken(token) && this.checkTokenTTL(token)){
 			return true;
 		}
+		return false;
+	},
+
+	checkUserAdmin: function(token){
+		if(this.checkUserAlive(token)){
+			return userList[token].isAdmin;	
+		}		
 		return false;
 	},
 
