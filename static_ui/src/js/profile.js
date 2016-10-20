@@ -8,11 +8,11 @@ function getData(){
     crossDomain: true,
     success: function(data){
       console.log(data);
-      var firstname=JSON.parse(data).rows.users_firstname;
-      var lastname=JSON.parse(data).rows.users_lastname;
-      var phone=JSON.parse(data).rows.users_phone;
-      var email=JSON.parse(data).rows.users_email;
-      password = JSON.parse(data).rows.users_password;
+      var firstname=JSON.parse(data).rows[0].users_firstname;
+      var lastname=JSON.parse(data).rows[0].users_lastname;
+      var phone=JSON.parse(data).rows[0].users_phone;
+      var email=JSON.parse(data).rows[0].users_email;
+      password = JSON.parse(data).rows[0].users_password;
       document.getElementById("fname").value = firstname;
       document.getElementById("lname").value = lastname;
       document.getElementById("phone").value = phone;
