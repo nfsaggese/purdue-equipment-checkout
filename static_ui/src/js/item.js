@@ -3,13 +3,27 @@ function getSingleItem(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root + '/getSingleItem' + params, true);
   xhttp.onload = function(e){displayItem(xhttp.responseText)};
-  xhttp.send(null);//only in use on post requests
+  xhttp.withCredentials = true;
+  xhttp.send(null);//dmin.htmlonly in use on post requests
+}
+
+function getItemHistory(id){//TODO WORKING ON THIS
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", root+'/getDeviceLog'+'?deviceID='+id, true);
+  xhttp.onload = function(e){displayItemHistory(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
+}
+function displayItemHistory(data){
+    console.log(data);
 }
 
 function displayItem(data){
+  console.log('display item');
   clearBottom();
-
-  var item = JSON.parse(data)['rows'][0];
+  var item = JSON.parse(data);
+  item = item['rows'][0];
+  console.log(item);
   //template operations
   var viewItemDetailsScript = $('#view-item-details-template').html();
   var viewItemDetailsTemplate = Handlebars.compile(viewItemDetailsScript);
@@ -50,18 +64,23 @@ function displayItem(data){
     checkOut: checkOut,
   };//close contex
   var viewItemDetailsHTML = viewItemDetailsTemplate(context);
-  $("#pageContent").html(viewItemDetailsHTML);
+  $("#pageBody").html(viewItemDetailsHTML);
 
   $(document).on("click","div[canCheckOut='True']",function(){
     var id = $(this).attr("itemID");
     checkOutItem(id);
-  })
+  });
 }//close displayItem()
 
 function checkOutItem(id){
   var xhttp = new XMLHttpRequest();
-  http.open("GET", root+'/getAllDevices', true);
-  xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+  xhttp.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
+  xhttp.onload = function(e){postCheckOut(xhttp.responseText,id)};
   xhttp.withCredentials = true;
   xhttp.send(null);
+}
+function postCheckOut(data,id){
+  console.log("Check Out Response" + String(data));
+  alert('Item checked out.');
+  getSingleItem(id);
 }

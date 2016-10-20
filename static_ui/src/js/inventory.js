@@ -1,6 +1,7 @@
 //Inventory
 function defaultInventoryView(){
   //default content
+  console.log('default inventory view');
   clearBottom();
   var inventoryPageNavigationScript = $('#inventory-page-navigation-template').html();
   var inventoryPageNavigationTemplate = Handlebars.compile(inventoryPageNavigationScript);
@@ -18,14 +19,17 @@ function defaultInventoryView(){
     $('#pageBody').html(getAvailableInventory());
   });
   //trigger to item details page
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){
+  var itemDetails = function(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
-  });
-  $(document).on("click",".inventoryItemCheckout", function(){
+  };
+  var CheckoutItemAction = function(){
     var id = $(this).parent().attr("itemID");
-    checkoutItem(id);
-  });
+    checkOutItem(id);
+  };
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", itemDetails);
+  $(document).on("click",".inventoryItemCheckOut", CheckoutItemAction);
+  console.log('default inventory view end');
 }
 
 function adminInventoryView(){

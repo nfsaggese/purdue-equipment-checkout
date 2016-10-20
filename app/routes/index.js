@@ -41,7 +41,9 @@ router.get('/getUserInfo', function(req, res, next) {
 	    return console.error('error fetching client from pool', err);
 	    }
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
 		done();
+		return;
 	    }
 	    console.log(req.cookies.token);
 	    var id = userAuth.getUserID(req.cookies.token);
@@ -63,6 +65,11 @@ router.get('/getDevices', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
 	    }
 	    client.query('SELECT * FROM users;', function(err, result) {
 		//call `done()` to release the client back to the pool
@@ -113,20 +120,75 @@ router.post('/updateLog', function(req, res, next) {
 	});
 });
 
-/* /getLog
- * GETS the log based on the device ID
- *
- */
-router.get('/getLog', function(req, res, next) {
+router.get('/validCookie', function(req, res, next) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('false');
+		done();
+
+		return;
+	    }
+	    res.send('true');
+	    done();
+	});
+router.get('/logoutUser', function(req, res, next) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('cookie expired');
+		done();
+
+		return;
+	    }
+	    res.clearCookie('token');
+	    res.send('success');
+	    done();
+	});
+
+router.get('/updateUser', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
 		done();
+		return;
 	    }
-	    var deviceName = req.query.deviceID;
-	    var query = `Select * from log where LOG_USERID = '${userName}' order by LOG_ENTRYID;`;
+	    var fName = req.query.USERS_FIRSTNAME;
+	    var lName = req.query.USERS_LASTNAME;
+	    var email = req.query.USERS_EMAIL;
+	    var password = req.query.USERS_PASSWORD;
+	    var phone = req.query.USERS_PHONE;
+	    var userID = userAuth.getUserID(req.cookies.token);
+
+	    var query = `UPDATE users SET (USERS_FIRSTNAME, USERS_LASTNAME, USERS_EMAIL, USERS_PASSWORD, USERS_PHONE) = ('${fName}', '${lName}', '${email}', '${password}','${phone}') WHERE users_unique_id = ${userID};`;
+	    
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
+
+/* /getLog
+ * GETS the log based on the device ID
+ *
+ */
+router.get('/getDeviceLog', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var deviceID = req.query.deviceID;
+	    var query = `Select * from log where LOG_EQUIPMENTID = ${deviceID} order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
@@ -140,6 +202,54 @@ router.get('/getLog', function(req, res, next) {
 	    });
 	});
 
+router.get('/getUserAdminLog', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var userID = req.query.USERID;
+	    var query = `Select * from log where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
+router.get('/getUserLog', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var userID = userAuth.getUserID(req.cookies.token);
+	    var query = `Select * from log where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
 /*
  * Attempts to retrieve user information given the correct
  * user email and password. Returns no rows if incorrect.
@@ -161,6 +271,13 @@ router.get('/loginUser', function(req, res, next) {
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
+		if (result.rows.length == 0) {
+		    res.status(401);
+		    res.send('Invalid email or password');
+		    done();
+
+		    return;
+		}
 		var ttl = 3600 * 1000;
 		var userToken = userAuth.addUserToMap(result.rows[0].users_unique_id, ttl, result.rows[0].users_isadmin);
 
@@ -174,19 +291,20 @@ router.get('/loginUser', function(req, res, next) {
 	});
 });
 
-router.get('/checkoutItem', function(req, res, next) {
+router.get('/checkOutItem', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
 	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
 		done();
+		return;
 	    }
 	    var equipmentID = req.query.EQUIPMENT_ID;
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var condition = req.query.EQUIPMENT_CONDITION;
 
-	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = '${equipmentID}'; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values ('${userID}', '${equipmentID}', true, '${condition}');`;
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = true WHERE equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT) values (${userID}, ${equipmentID}, true);`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
@@ -233,6 +351,11 @@ router.get('/getSingleItem', function(req, res, next) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
 	    var itemID = req.query.EQUIPMENT_UNIQUE_ID;
 	    var query = 'select * from equipment where EQUIPMENT_UNIQUE_ID = ' + itemID + ';';
 
@@ -258,6 +381,11 @@ router.post('/retireItem', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
 	    }
 	    var itemID = req.query.EQUIPMENT_UNIQUE_ID;
 
@@ -294,7 +422,9 @@ router.post('/postUpdateDeviceUser', function(req, res, next) {
 router.get('/getAllDevices', function(req, res, next) {
 	//console.log(req.cookies.token);
 	if(!userAuth.checkUserAlive(req.cookies.token)){
+	    res.send('invalid cookie');
 	done();
+	return;
 	}
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
@@ -324,6 +454,11 @@ router.get('/createNewItem', function(req, res, next) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
 	    var queryURL = `insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('${equipmentName}','${equipmentType}','${equipmentBrand}','${equipmentDesc}');`;
 	    console.log(queryURL);
 	    client.query(queryURL , function(err, result) {
@@ -340,7 +475,7 @@ router.get('/createNewItem', function(req, res, next) {
 /*
  * Check in an item using itemID and userToken
  */
-router.get('/checkInItem', function(req, res, next) {
+/*router.get('/checkInItem', function(req, res, next) {
 	//insert into EQUIPMENT (EQUIPMENT_NAME,EQUIPMENT_TYPE,EQUIPMENT_BRAND,EQUIPMENT_DESCRIPTION) values ('Blue Wrench','Wrench','Altendorf','A blue wrench');
 	if(!userAuth.checkUserAlive(req.cookies.token)){
 	    done();
@@ -366,11 +501,42 @@ router.get('/checkInItem', function(req, res, next) {
 		//output: 1
 		});
 	    });
+});*/
+router.get('/checkInItem', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var equipmentID = req.query.EQUIPMENT_ID;
+	    var userID = userAuth.getUserID(req.cookies.token);
+
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
+	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false);`;
+	    console.log(' user login query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: verifyUser', err);
+		}
+		});
+	});
 });
 
 //Get all inventory
 router.get('/allInventory', function(req, res, next){
 	global.postPool.connect(function(err, client, done) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
 	    var queryURL = `Select * from EQUIPMENT`;
 
 	    client.query(queryURL, function(err, result) {
@@ -386,6 +552,11 @@ router.get('/allInventory', function(req, res, next){
 //Get all avaliable Inventory //TODO this isnt' spelled right
 router.get('/getAvailableInventory', function(req, res, next){
 	global.postPool.connect(function(err, client, done) {
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
 	    var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false`;
 
 	    client.query(queryURL, function(err, result) {
@@ -403,6 +574,11 @@ router.get('/getAllUsers', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
 	    }
 
 	    var query = `Select USERS_UNIQUE_ID, USERS_EMAIL,  USERS_FIRSTNAME, USERS_LASTNAME, USERS_ISADMIN, USERS_DESCRIPTION from USERS ORDER BY USERS_UNIQUE_ID`;
@@ -423,6 +599,11 @@ router.get('/getEquipmentInfo', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
 	    }
 	    var equipmentID  = req.query.EQUIPMENT_ID;
 	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE equipment_unique_id = ${equipmentID}`;

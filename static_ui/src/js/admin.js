@@ -73,11 +73,51 @@ function defaultAdminInventoryView(){//done
 //////////////////////USERS
 function defaultAdminUsersView(){
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", root+'/getAllDevices', true);
-    xhttp.onload = function(e){displayInventory(xhttp.responseText)};
+    xhttp.open("GET", root+'/getAllUsers', true);
+    xhttp.onload = function(e){displayAllUsers(xhttp.responseText)};
     xhttp.withCredentials = true;
     xhttp.send(null);
-}//TODO
+}
+function displayAllUsers(data){
+  clearBottom();
+  var adminUsersTemplate = Handlebars.compile($('#admin-users-template').html());
+  $('#pageBody').html(adminUsersTemplate);
+  //built container now need rows
+  data = JSON.parse(data);
+  var users = data['rows'];
+  console.log(users);
+  var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-individual-template').html());
 
+  for(var i = 0; i < users.length; i++){
+    var context = {
+      id: users[i]['users_unique_id'],
+      email: users[i]['users_email'],
+      first: users[i]['users_firstname'],
+      last: users[i]['users_lastname'],
+      admin: users[i]['users_isadmin'],
+    }
+    $('#containerTarget').append(adminUserIndividualTemplate(context));
+  }
+  //view details listener //maybe need seperate thing for admins
+  $(document).on("click",'div[fieldcontent="viewdetails"]',adUsDetails);
+}
+var adUsDetails = function adminUserDetailsListener(){
+  var id = $(this).parent().attr("userid");
+  getAdminUserLog(id);
+};
+function getAdminUserLog(id){//TODO
+  //var id = $(selector).parent().attr("userid");
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", root+'/getUserAdminLog?USERID='+id, true);
+  xhttp.onload = function(e){displayAdminUserLog(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
+}
+function displayAdminUserLog(data){
+  data = JSON.parse(data);
+  var userData = data['rows'];
+  console.log(userData);
+
+}
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO
