@@ -3,6 +3,7 @@ function getSingleItem(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root + '/getSingleItem' + params, true);
   xhttp.onload = function(e){displayItem(xhttp.responseText)};
+  xhttp.withCredentials = true;
   xhttp.send(null);//dmin.htmlonly in use on post requests
 }
 
