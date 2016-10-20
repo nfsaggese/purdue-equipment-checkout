@@ -2,7 +2,7 @@ function getSingleItem(id){
   var params = "?EQUIPMENT_UNIQUE_ID=" + id;//add id to params ilst for get request
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root + '/getSingleItem' + params, true);
-  xhttp.onload = funCheckoutItemActionction(e){displayItem(xhttp.responseText)};
+  xhttp.onload = function(e){displayItem(xhttp.responseText)};
   xhttp.withCredentials = true;
   xhttp.send(null);//dmin.htmlonly in use on post requests
 }
