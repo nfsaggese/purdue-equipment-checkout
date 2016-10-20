@@ -17,8 +17,9 @@ $(document).ready(function() {
 /* todo
 
 - Checkout items in user
+  --no response integrated
 -view item history from admin inventory views
-  -- still isn't working, route is down
+  -- still isn't working, route is down //view still needs to be built once json is available
 -user/admin profile integration
 -check for valid cookie else redirect
 -admin users view -> view user history
