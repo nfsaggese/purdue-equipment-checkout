@@ -23,5 +23,6 @@ $(document).ready(function() {
 -user/admin profile integration
 -check for valid cookie else redirect
 -admin users view -> view user history
+  --tabular view done...individual user view still needs to be finished.
 
 */
