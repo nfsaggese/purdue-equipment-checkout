@@ -99,7 +99,7 @@ function displayAllUsers(data){
     $('#containerTarget').append(adminUserIndividualTemplate(context));
   }
   //view details listener //maybe need seperate thing for admins
-  $('div[fieldcontent="viewdetails"]').click(getAdminUserLog(this));
+  $(document).on("click",'div[fieldcontent="viewdetails"]',getAdminUserLog('div[fieldcontent="viewdetails"]'));
 }
 function getAdminUserLog(selector){//TODO
   var id = $(selector).parent().attr("userid");
