@@ -99,10 +99,13 @@ function displayAllUsers(data){
     $('#containerTarget').append(adminUserIndividualTemplate(context));
   }
   //view details listener //maybe need seperate thing for admins
-  $(document).on("click",'div[fieldcontent="viewdetails"]',getAdminUserLog('div[fieldcontent="viewdetails"]'));
+  $(document).on("click",'div[fieldcontent="viewdetails"]',function(){
+    var id = $(this).parent().attr("userid");
+    getAdminUserLog(id);
+  });
 }
-function getAdminUserLog(selector){//TODO
-  var id = $(selector).parent().attr("userid");
+function getAdminUserLog(id){//TODO
+  //var id = $(selector).parent().attr("userid");
   console.log(id);
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getUserAdminLog?USERID='+id, true);
