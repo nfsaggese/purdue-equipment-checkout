@@ -15,14 +15,16 @@ function getItemHistory(id){//TODO WORKING ON THIS
   xhttp.send(null);
 }
 function displayItemHistory(data){
+    data = JSON.parse(data);
     console.log(data);
     var log = data['rows'];
     console.log(log);
     console.log(typeof(log));
     clearBottom();
-    // if(log === undefined){
-    //   $('#pageBody').html('<h1>This item has no history.</h1>');
-    //   return;
+    if(log.length == 0){
+       $('#pageBody').html('<h1>This item has no history.</h1>');
+       return;
+    }
     var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
     var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log').html());
     $('#pageBody').html(adminEquipmentContainerLogTemplate);
