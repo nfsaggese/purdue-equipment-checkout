@@ -18,7 +18,7 @@ function displayItemHistory(data){
     var log = data['rows'];
     console.log(log);
     clearBottom();
-    if(log.length == 0){
+    if((log.length == 0) || (log == NULL)){
       $('#pageBody').html('<h1>This item has no history.</h1>');
     }else{
       var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
