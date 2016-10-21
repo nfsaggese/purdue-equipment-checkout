@@ -123,6 +123,7 @@ function displayAdminUserLog(data){
 
   for(var i = 0; i < userData.length; i++){
     var context = {
+      equipid: userData[i]['log_equipmentid'],
       date: userData[i]['log_entrydate'],
       condition: userData[i]['log_equipmentcondition'],
       outin: userData[i]['log_ischeckingout'],
