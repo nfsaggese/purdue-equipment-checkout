@@ -5,7 +5,8 @@ var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080';
 $(document).ready(function() {
     var currentPage = window.location.pathname;
     console.log(currentPage);
-    if((currentPage == '/') || (currentPage == '/user.html')){
+    checkCookie();
+    if(currentPage == '/user.html'){
       console.log('getting here');
       userGlobalNav();
     }else{
@@ -13,12 +14,22 @@ $(document).ready(function() {
       adminGlobalNav();
     }
 });
-
+function checkCookie(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", root+'/validCookie', true);
+  xhttp.onload = function(e){evaluateCookie(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
+}
+function evaluateCookie(data){
+  data = JSON.parse(data);
+  console.log("this is the response to check cookie" + string(data));
+}
 /* todo
 
 - Checkout items in user
   --no response integrated--DONE
-  
+
 -view item history from admin inventory views
   -- still isn't working, route is down //view still needs to be built once json is available
 -user/admin profile integration
