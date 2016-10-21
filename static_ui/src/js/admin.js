@@ -121,10 +121,10 @@ function displayAdminUserLog(data){
   $('#pageBody').html(baseTemplate);
   var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-log-template').html());
 
-  for(var i = 0; i < users.length; i++){
+  for(var i = 0; i < userData.length; i++){
     var context = {
-      date: users[i]['users_unique_id'],
-      condition: users[i]['users_email'],
+      date: userData[i]['log_entrydate'],
+      condition: userData[i]['log_equipmentcondition'],
       outin: userData[i]['log_ischeckingout'],
     }
     $('#containerTarget').append(adminUserIndividualTemplate(context));
