@@ -18,18 +18,22 @@ function displayItemHistory(data){
     var log = data['rows'];
     console.log(log);
     clearBottom();
-    var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
-    var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log').html());
-    $('#pageBody').html(adminEquipmentContainerLogTemplate);
-    for(var i = 0; i < log.length; i++){
-      var context = {
-        userid: log[i]['log_userid'],
-        date: log[i]['log_entrydate'],
-        condition: log[i]['log_equipmentcondition'],
-        outin: log[i]['log_ischeckingout'],
+    if(log.length == 0){
+      $('#pageBody').html('<h1>This item has no history.</h1>');
+    }else{
+      var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
+      var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log').html());
+      $('#pageBody').html(adminEquipmentContainerLogTemplate);
+      for(var i = 0; i < log.length; i++){
+        var context = {
+          userid: log[i]['log_userid'],
+          date: log[i]['log_entrydate'],
+          condition: log[i]['log_equipmentcondition'],
+          outin: log[i]['log_ischeckingout'],
+        }
+        $('#containerTarget').append(adminUserIndividualTemplate(adminEquipmentLog));
       }
-      $('#containerTarget').append(adminUserIndividualTemplate(adminEquipmentLog));
-    }
+    }//close else
 }
 
 function displayItem(data){
