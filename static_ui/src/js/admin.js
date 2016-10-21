@@ -117,7 +117,7 @@ function displayAdminUserLog(data){
   clearBottom();
   data = JSON.parse(data);
   var userData = data['rows'];
-  var baseTemplate = Handlebars.compile($('#admin-users-contianer-log-template').html());
+  var baseTemplate = Handlebars.compile($('#admin-users-container-log-template').html());
   $('#pageBody').html(baseTemplate);
   var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-log-template').html());
 
