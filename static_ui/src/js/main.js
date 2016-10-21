@@ -1,5 +1,4 @@
 var root = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080';
-var webroot = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com'
 //todo create back and forwards variables stacks with closures to store prior and future views
 
 //init
@@ -36,10 +35,12 @@ function evaluateCookie(data){
   --no response integrated--DONE
 
 -view item history from admin inventory views
-  -- still isn't working, route is down //view still needs to be built once json is available
+  -- still isn't working, route is down //view still needs to be built once json is available --done
 -user/admin profile integration
 -check for valid cookie else redirect
-
+--done
+--checkin item
+---waiting on route for items a user curerntly has out
 -admin users view -> view user history
   --tabular view done...individual user view still needs to be finished.-->FINISHED
 
