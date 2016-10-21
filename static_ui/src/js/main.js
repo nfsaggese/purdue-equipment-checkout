@@ -23,7 +23,8 @@ function checkCookie(){
 }
 function evaluateCookie(data){
   data = JSON.parse(data);
-  console.log("this is the response to check cookie" + string(data));
+  console.log("this is the response to check cookie");
+  console.log(data);
 }
 /* todo
 
