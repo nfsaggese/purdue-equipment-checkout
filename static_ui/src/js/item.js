@@ -20,6 +20,7 @@ function displayItemHistory(data){
     clearBottom();
     if(log === undefined){
       $('#pageBody').html('<h1>This item has no history.</h1>');
+      return;
     }else{
       var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
       var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log').html());
@@ -30,7 +31,8 @@ function displayItemHistory(data){
           date: log[i]['log_entrydate'],
           condition: log[i]['log_equipmentcondition'],
           outin: log[i]['log_ischeckingout'],
-        }
+        }//close context
+
         $('#containerTarget').append(adminUserIndividualTemplate(adminEquipmentLog));
       }
     }//close else
