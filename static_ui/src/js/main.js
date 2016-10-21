@@ -6,19 +6,20 @@ var webroot = 'http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com'
 $(document).ready(function() {
     var currentPage = window.location.pathname;
     console.log(currentPage);
-    checkCookie();
-    if(currentPage == '/user.html'){
-      console.log('getting here');
-      userGlobalNav();
-    }else{
-      console.log('getting here');
-      adminGlobalNav();
+    if(checkCookie()){
+      if(currentPage == '/user.html'){
+        console.log('getting here');
+        userGlobalNav();
+      }else{
+        console.log('getting here');
+        adminGlobalNav();
+      }
     }
 });
 function checkCookie(){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/validCookie', true);
-  xhttp.onload = function(e){evaluateCookie(xhttp.responseText)};
+  xhttp.onload = function(e){ return evaluateCookie(xhttp.responseText)};
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
@@ -28,6 +29,9 @@ function evaluateCookie(data){
   console.log(data);
   if(data == false){
     window.location.assign('index.html');
+    return false;
+  }else{
+    return true;
   }
 }
 /* todo
