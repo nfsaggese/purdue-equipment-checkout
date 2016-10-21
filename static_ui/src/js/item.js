@@ -15,6 +15,7 @@ function getItemHistory(id){//TODO WORKING ON THIS
   xhttp.send(null);
 }
 function displayItemHistory(data){
+    console.log(data);
     var log = data['rows'];
     console.log(log);
     console.log(typeof(log));
