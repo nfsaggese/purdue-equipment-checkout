@@ -36,7 +36,7 @@ function displayItemHistory(data){
         outin: log[i]['log_ischeckingout'],
       }//close context
 
-      $('#containerTarget').append(adminUserIndividualTemplate(adminEquipmentLog));
+      $('#containerTarget').append(adminEquipmentLog(context));
     }//close for
 }
 
