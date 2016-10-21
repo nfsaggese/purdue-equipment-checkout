@@ -27,7 +27,7 @@ function evaluateCookie(data){
   console.log("this is the response to check cookie");
   console.log(data);
   if(data == false){
-    window.location.assign('');
+    window.location.assign('index.html');
   }
 }
 /* todo
