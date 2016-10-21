@@ -25,8 +25,8 @@ function displayItemHistory(data){
        $('#pageBody').html('<h1>This item has no history.</h1>');
        return;
     }
-    var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log').html());
-    var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log').html());
+    var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
+    var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log-template').html());
     $('#pageBody').html(adminEquipmentContainerLogTemplate);
     for(var i = 0; i < log.length; i++){
       var context = {
