@@ -27,7 +27,6 @@ function displayUserHistory(data){
       condition: data[i]['log_equipmentid'],
       outin: data[i]['log_ischeckingout'],
     }//close context
-    if(context['outin'] == 'true')
     $('#containerTarget').append(userLogTemplate(context));
   }//close for
 //   var checkin = function(){
