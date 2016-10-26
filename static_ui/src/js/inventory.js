@@ -23,6 +23,7 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   };
+  var checkout = "";//trying to free this variable
   var checkout = function(){
     console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
