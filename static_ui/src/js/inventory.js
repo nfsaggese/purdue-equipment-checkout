@@ -23,15 +23,13 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   };
-  var checkout = "";//trying to free this variable
   var checkout = function(){
     console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   };
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", showing);
-  $('.inventoryItemCheckOut').unbind();//should fix multi req
-  $(document).on("click",".inventoryItemCheckOut", checkout);
+  $(".inventoryItemTitle, .inventoryItemDetails").off().click(showing);
+  $(".inventoryItemCheckOut").off().click(checkout);
   console.log('default inventory view end');
 }
 
