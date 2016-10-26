@@ -29,7 +29,8 @@ function defaultInventoryView(){
     checkOutItem(id);
   };
   $(".inventoryItemTitle, .inventoryItemDetails").off().click(showing);
-  $(".inventoryItemCheckOut").off().click(checkout);
+  $(".inventoryItemCheckOut").off();
+  $(".inventoryItemCheckOut").click(checkout);
   console.log('default inventory view end');
 }
 
