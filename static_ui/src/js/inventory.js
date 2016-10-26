@@ -19,11 +19,11 @@ function defaultInventoryView(){
     $('#pageBody').html(getAvailableInventory());
   });
   //trigger to item details page
-  var showing = function itemDetails(){
+  var showing = function(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   };
-  var checkout = function CheckoutItemAction(){
+  var checkout = function(){
     console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
