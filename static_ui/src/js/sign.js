@@ -4,11 +4,23 @@ function checkPassword(){
   if(document.getElementById("password").value === document.getElementById("confirm password").value){
     return true;
   }
-  else{
+  else
+    alert("Password does not match.");
     return false;
   }
 }
 
+function checkAllInputs(){
+  if(document.getElementById("first name").value === "" || document.getElementById("last name").value === "" ||
+  document.getElementById("email").value === "" || document.getElementById("number").value === "" ||
+  document.getElementById("password").value === "" || document.getElementById("confirm password").value === ""){
+    alert("Invalid field");
+    return false;
+  }
+  else{
+    return true;
+  }
+}
 /*  function to get a response from server when user clicks create account */
 
 function submitLogin(){
@@ -36,10 +48,8 @@ function submitLogin(){
 $(document).ready(function(){
   $('#submit').click(function(){
     console.log("called");
-    if(checkPassword()){
+    if(checkPassword() && checkAllInputs()){
       submitLogin();
-    }else{
-      alert("Password does not match.");
     }
   });
 });
