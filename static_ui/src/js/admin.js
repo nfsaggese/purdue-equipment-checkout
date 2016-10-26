@@ -34,7 +34,11 @@ function adminActionsRegisterView(){
     var equipment_type = $('input[name="EQUIPMENT_TYPE"]').val();
     var equipment_description = $('input[name="EQUIPMENT_DESCRIPTION"]').val();
     var url = root + "/createNewItem" + "?" + "EQUIPMENT_NAME=" + equipment_name + "&EQUIPMENT_BRAND="+equipment_brand+"&EQUIPMENT_TYPE=" +equipment_type + "&EQUIPMENT_DESCRIPTION="+equipment_description;
-    $.get(url,refreshAdminActionsRegisterView());
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.onload = function(e){refreshAdminActionsRegisterView()};
+    xhttp.withCredentials = true;
+    xhttp.send(null);
   });
 
   function refreshAdminActionsRegisterView(){
@@ -55,7 +59,10 @@ function adminActionsRetireView(){
     var data = {"EQUIPMENT_UNIQUE_ID":equipment_unique_id,};
     data = JSON.stringify();//ready for more secure post
     var url = root + "/retireItem?" + "EQUIPMENT_UNIQUE_ID=" + equipment_unique_id;
-    $.post(url, refreshAdminActionsRetireView(data,status));
+    xhttp.open("POST", url, true);
+    xhttp.onload = function(e){refreshAdminActionsRetireView(data,status)};
+    xhttp.withCredentials = true;
+    xhttp.send(null);
   });
 
   function refreshAdminActionsRetireView(data,status){
