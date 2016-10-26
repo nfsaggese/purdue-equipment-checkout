@@ -1,5 +1,5 @@
 //Inventory
-function defaultInventoryView(){
+var defaultInventoryView = function(){
   //default content
   console.log('default inventory view');
   clearBottom();
