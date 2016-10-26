@@ -19,17 +19,7 @@ function defaultInventoryView(){
     $('#pageBody').html(getAvailableInventory());
   });
   //trigger to item details page
-  var itemDetails = function(){
-    var id = $(this).parent().attr("itemID");
-    getSingleItem(id);
-  };
-  function CheckoutItemAction(){
-    console.log('click listener for checkout fired');
-    var id = $(this).parent().attr("itemID");
-    checkOutItem(id);
-  };
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", itemDetails);
-  $(document).on("click",".inventoryItemCheckOut", CheckoutItemAction());
+
   console.log('default inventory view end');
 }
 
@@ -145,4 +135,15 @@ function displayInventory(data){//takes inventory from the api and renders to sc
     }//close else
     itemAppendTarget = "#inventoryItem" + i.toString();
   }//close for loop
+  var itemDetails = function(){
+    var id = $(this).parent().attr("itemID");
+    getSingleItem(id);
+  };
+  function CheckoutItemAction(){
+    console.log('click listener for checkout fired');
+    var id = $(this).parent().attr("itemID");
+    checkOutItem(id);
+  };
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", itemDetails);
+  $(document).on("click",".inventoryItemCheckOut", CheckoutItemAction());
 }//close displayInventory()
