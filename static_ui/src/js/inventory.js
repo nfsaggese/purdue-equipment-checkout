@@ -30,7 +30,7 @@ function defaultInventoryView(){
   };
   $(".inventoryItemTitle, .inventoryItemDetails").off().click(showing);
   $(".inventoryItemCheckOut").off();
-  $(".inventoryItemCheckOut").click(checkout);
+  $(".inventoryItemCheckOut").on("click",checkout);
   console.log('default inventory view end');
 }
 
