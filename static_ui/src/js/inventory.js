@@ -28,8 +28,8 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   };
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){showing});
-  $(document).on("click",".inventoryItemCheckOut", function(){checkout});
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", showing);
+  $(document).on("click",".inventoryItemCheckOut", checkout);
   console.log('default inventory view end');
 }
 
