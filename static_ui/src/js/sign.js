@@ -4,7 +4,7 @@ function checkPassword(){
   if(document.getElementById("password").value === document.getElementById("confirm password").value){
     return true;
   }
-  else
+  else{
     alert("Password does not match.");
     return false;
   }
