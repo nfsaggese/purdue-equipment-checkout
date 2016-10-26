@@ -19,17 +19,17 @@ function defaultInventoryView(){
     $('#pageBody').html(getAvailableInventory());
   });
   //trigger to item details page
-  function itemDetails(){
+  var showing = function itemDetails(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
-  };
-  function CheckoutItemAction(){
+  }
+  var checkout = function CheckoutItemAction(){
     console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
-  };
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){itemDetails();});
-  $(document).on("click",".inventoryItemCheckOut", function(){CheckoutItemAction();});
+  }
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){showing;});
+  $(document).on("click",".inventoryItemCheckOut", function(){checkout;});
   console.log('default inventory view end');
 }
 
