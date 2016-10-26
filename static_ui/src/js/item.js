@@ -95,6 +95,7 @@ function displayItem(data){
 }//close displayItem()
 
 function checkOutItem(id){
+  console.log('running check out item');
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
   xhttp.onload = function(e){afterCheckout(xhttp.responseText,id)};

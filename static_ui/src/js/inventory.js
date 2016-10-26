@@ -24,6 +24,7 @@ function defaultInventoryView(){
     getSingleItem(id);
   };
   var CheckoutItemAction = function(){
+    console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   };
