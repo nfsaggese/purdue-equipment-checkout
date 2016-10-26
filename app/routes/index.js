@@ -82,6 +82,36 @@ router.get('/getDevices', function(req, res, next) {
 		});
 	    });
 	});
+router.post('/getCheckedOutItems', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var userID = userAuth.getUserID(req.cookies.token);
+	    var query = 'insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT, LOG_EQUIPMENTCONDITION) '
+	    + 'values (' + userId  + ',' + equipmentId + ',' + isCheckingOut + ',' + equipmentCond +');';
+	    var query = `select * from log l inner join users u on l.LOG_USERID = u.USERS_UNIQUE_ID
+	    inner join equipment e on e.equipment_unique_id = l.LOG_EQUIPMENTID where
+	    e.equipment_ischeckedout = false and l.LOG_USERID = {$userID};`;
+
+	    console.log('userId: ' + userId + '\nequipmentId: ' + equipmentId + '\nisCheckingOut: ' +
+		isCheckingOut + '\nequipmentCond: ' + equipmentCond);
+	    console.log('update log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	});
+});
 
 /* Update log with:
  * LOG_USERID
@@ -207,7 +237,8 @@ router.get('/getUserAdminLog', function(req, res, next) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
-	    if(!userAuth.checkUserAlive(req.cookies.token)){
+	    if((!userAuth.checkUserAlive(req.cookies.token)) ||
+		(userAuth.checkUserAdmin(req.cookies.token) == false)) {
 		res.send('invalid cookie');
 		done();
 		return;
@@ -454,7 +485,8 @@ router.get('/createNewItem', function(req, res, next) {
 	    if(err) {
 	    return console.error('error fetching client from pool', err);
 	    }
-	    if(!userAuth.checkUserAlive(req.cookies.token)){
+	    if((!userAuth.checkUserAlive(req.cookies.token)) ||
+		(userAuth.checkUserAdmin(req.cookies.token) == false)) {
 		res.send('invalid cookie');
 		done();
 		return;
