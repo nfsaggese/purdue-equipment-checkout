@@ -28,9 +28,9 @@ function defaultInventoryView(){
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   };
-  $(".inventoryItemTitle, .inventoryItemDetails").off().click(showing);
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails",showing);
   //$(".inventoryItemCheckOut").unbind();
-  $(".inventoryItemCheckOut").on("click",checkout);
+  $(document).on("click",".inventoryItemCheckOut",checkout);
   console.log('default inventory view end');
 }
 
