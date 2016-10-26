@@ -24,6 +24,7 @@ function submitLogin(){
     crossDomain: true,
     success: function(data){
       console.log(data);
+      alert("Account successfully created, please login!");
       window.location = "index.html";
     },
     error: function(){
@@ -37,6 +38,8 @@ $(document).ready(function(){
     console.log("called");
     if(checkPassword()){
       submitLogin();
+    }else{
+      alert("Password does not match.");
     }
   });
 });
