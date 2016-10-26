@@ -1,3 +1,4 @@
+/*  function to get a response from server when user clicks login */
 
 function submitLogin(){
   var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/loginUser?USERS_EMAIL="+document.getElementById("email").value+"&USERS_PASSWORD="+document.getElementById("password").value;

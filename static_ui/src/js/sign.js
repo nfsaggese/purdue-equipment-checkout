@@ -1,3 +1,15 @@
+/* funtion to check if the user input matching password for signup */
+
+function checkPassword(){
+  if(document.getElementById("password").value === document.getElementById("confirm password").value){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+/*  function to get a response from server when user clicks create account */
 
 function submitLogin(){
   var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/createUser?USERS_FIRSTNAME="
@@ -23,6 +35,8 @@ function submitLogin(){
 $(document).ready(function(){
   $('#submit').click(function(){
     console.log("called");
-    submitLogin();
+    if(checkPassword()){
+      submitLogin();
+    }
   });
 });
