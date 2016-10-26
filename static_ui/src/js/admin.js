@@ -114,10 +114,22 @@ function getAdminUserLog(id){//TODO
   xhttp.send(null);
 }
 function displayAdminUserLog(data){
+  clearBottom();
   data = JSON.parse(data);
   var userData = data['rows'];
-  console.log(userData);
+  var baseTemplate = Handlebars.compile($('#admin-users-container-log-template').html());
+  $('#pageBody').html(baseTemplate);
+  var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-log-template').html());
 
+  for(var i = 0; i < userData.length; i++){
+    var context = {
+      equipid: userData[i]['log_equipmentid'],
+      date: userData[i]['log_entrydate'],
+      condition: userData[i]['log_equipmentcondition'],
+      outin: userData[i]['log_ischeckingout'],
+    }
+    $('#containerTarget').append(adminUserIndividualTemplate(context));
+  }
 }
 /////////////////////PROFILE
 function defaultAdminProfileView(){}//TODO

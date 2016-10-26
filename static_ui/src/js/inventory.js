@@ -19,16 +19,17 @@ function defaultInventoryView(){
     $('#pageBody').html(getAvailableInventory());
   });
   //trigger to item details page
-  var itemDetails = function(){
+  var showing = function(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
   };
-  var CheckoutItemAction = function(){
+  var checkout = function(){
+    console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
   };
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", itemDetails);
-  $(document).on("click",".inventoryItemCheckOut", CheckoutItemAction);
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", showing);
+  $(document).on("click",".inventoryItemCheckOut", checkout);
   console.log('default inventory view end');
 }
 

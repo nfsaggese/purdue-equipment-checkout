@@ -15,7 +15,29 @@ function getItemHistory(id){//TODO WORKING ON THIS
   xhttp.send(null);
 }
 function displayItemHistory(data){
+    data = JSON.parse(data);
     console.log(data);
+    var log = data['rows'];
+    console.log(log);
+    console.log(typeof(log));
+    clearBottom();
+    if(log.length == 0){
+       $('#pageBody').html('<h1>This item has no history.</h1>');
+       return;
+    }
+    var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
+    var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log-template').html());
+    $('#pageBody').html(adminEquipmentContainerLogTemplate);
+    for(var i = 0; i < log.length; i++){
+      var context = {
+        userid: log[i]['log_userid'],
+        date: log[i]['log_entrydate'],
+        condition: log[i]['log_equipmentcondition'],
+        outin: log[i]['log_ischeckingout'],
+      }//close context
+
+      $('#containerTarget').append(adminEquipmentLog(context));
+    }//close for
 }
 
 function displayItem(data){
@@ -73,13 +95,14 @@ function displayItem(data){
 }//close displayItem()
 
 function checkOutItem(id){
+  console.log('running check out item');
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
-  xhttp.onload = function(e){postCheckOut(xhttp.responseText,id)};
+  xhttp.onload = function(e){afterCheckout(xhttp.responseText,id)};
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
-function postCheckOut(data,id){
+var afterCheckout = function postCheckOut(data,id){
   console.log("Check Out Response" + String(data));
   alert('Item checked out.');
   getSingleItem(id);
