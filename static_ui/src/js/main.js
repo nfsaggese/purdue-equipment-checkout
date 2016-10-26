@@ -9,9 +9,26 @@ $(document).ready(function() {
     if(currentPage == '/user.html'){
       console.log('getting here');
       userGlobalNav();
+      var showing = function(){
+        var id = $(this).parent().attr("itemID");
+        getSingleItem(id);
+      };
+      var checkout = function(){
+        console.log('click listener for checkout fired');
+        var id = $(this).parent().attr("itemID");
+        checkOutItem(id);
+      };
+      $(document).on("click",".inventoryItemTitle, .inventoryItemDetails",showing);
+      //$(".inventoryItemCheckOut").unbind();
+      $(document).on("click",".inventoryItemCheckOut",checkout);
     }else{
       console.log('getting here');
       adminGlobalNav();
+      //trigger to item details page
+      $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){
+        var id = $(this).parent().attr("itemID");
+        getItemHistory(id);
+      });
     }
 });
 function checkCookie(){
