@@ -29,6 +29,7 @@ function defaultInventoryView(){
     checkOutItem(id);
   };
   $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", showing);
+  $('.inventoryItemCheckOut').unbind();//should fix multi req
   $(document).on("click",".inventoryItemCheckOut", checkout);
   console.log('default inventory view end');
 }
