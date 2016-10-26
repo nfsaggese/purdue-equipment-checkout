@@ -22,14 +22,14 @@ function defaultInventoryView(){
   var showing = function itemDetails(){
     var id = $(this).parent().attr("itemID");
     getSingleItem(id);
-  }
+  };
   var checkout = function CheckoutItemAction(){
     console.log('click listener for checkout fired');
     var id = $(this).parent().attr("itemID");
     checkOutItem(id);
-  }
-  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){showing;});
-  $(document).on("click",".inventoryItemCheckOut", function(){checkout;});
+  };
+  $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){showing});
+  $(document).on("click",".inventoryItemCheckOut", function(){checkout});
   console.log('default inventory view end');
 }
 
