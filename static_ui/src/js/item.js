@@ -57,10 +57,12 @@ function displayItem(data){
     if(!item['equipment_ischeckedout']){
       canCheckOut = "True";
       checkOut = "Check Out";
+      checkOutStyle = "action-button";
       return "In Stock";
     }else{
       checkOut = "Not Available";
       canCheckOut = "False";
+      checkOutStyle = "bad-action";
       return "Out of Stock";
     }
   }//close stock

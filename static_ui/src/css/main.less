@@ -63,3 +63,14 @@
   height:50px;
   border-radius: 50%;
 }
+
+.action-button {
+  box-shadow: 0 4px 2px -2px gray;
+  border-radius:6px;
+  color:@white;
+  background:@blue;
+}
+.action-button {
+  &:extend(.action-button);
+  background:@red;
+}
