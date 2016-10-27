@@ -16,7 +16,7 @@ function displayCheckedOutItems(data){
   $('#containerTarget').before(userContainerTemplate);
   for(var i = 0; i < data.length; i++){
     var context = {
-      name: data[i]['name'],
+      name: data[i]['equipment_name'],
       id: data[i]['id'],
     }//close context
     $('#containerTarget1').append(userLogTemplate(context));
