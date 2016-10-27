@@ -157,6 +157,8 @@
   width: 250px;
   padding: 10px;
   text-align: center;
+  cursor: pointer;
+  cursor: hand;
 }
 .bad-action-button {
   background: #e74c3c;
