@@ -9,12 +9,15 @@ function defaultUserHistoryView(){
 }
 function displayCheckedOutItems(data){
   data = JSON.parse(data);
+  data = data['rows'];
+  var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
+  $('#containerTarget').prepend(userContainerTemplate);
   console.log(data);
 }
 function displayUserHistory(data){
-  console.log(data);
+  //console.log(data);
   data = JSON.parse(data);
-  console.log(data);
+  // console.log(data);
   data = data['rows'];
   clearBottom();
   if(data.length == 0){
