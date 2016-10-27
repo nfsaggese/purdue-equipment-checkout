@@ -10,6 +10,7 @@ function defaultUserHistoryView(){
 function displayCheckedOutItems(data){
   data = JSON.parse(data);
   data = data['rows'];
+  console.log(data);
   var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
   var userLogTemplate = Handlebars.compile($('#user-current-items-log').html());
   $('#containerTarget').before(userContainerTemplate);
