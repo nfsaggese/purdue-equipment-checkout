@@ -15,9 +15,9 @@ function displayCheckedOutItems(data){
   console.log(data);
 }
 function displayUserHistory(data){
-  console.log(data);
+  //console.log(data);
   data = JSON.parse(data);
-  console.log(data);
+  // console.log(data);
   data = data['rows'];
   clearBottom();
   if(data.length == 0){
