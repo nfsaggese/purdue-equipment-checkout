@@ -9,6 +9,9 @@ function defaultUserHistoryView(){
 }
 function displayCheckedOutItems(data){
   data = JSON.parse(data);
+  data = data['rows'];
+  var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
+  $('#containerTarget').prepend(userContainerTemplate);
   console.log(data);
 }
 function displayUserHistory(data){
