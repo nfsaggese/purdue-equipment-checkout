@@ -53,14 +53,17 @@ function displayItem(data){
   //building context to render
   var canCheckOut = "False";
   var checkOut = "Not Available";
+  var checkOutStyle = "action-button";
   function stock(item){
     if(!item['equipment_ischeckedout']){
       canCheckOut = "True";
       checkOut = "Check Out";
+      checkOutStyle = "action-button";
       return "In Stock";
     }else{
       checkOut = "Not Available";
       canCheckOut = "False";
+      checkOutStyle = "bad-action-button";
       return "Out of Stock";
     }
   }//close stock
@@ -84,6 +87,7 @@ function displayItem(data){
     itemID: item['equipment_unique_id'],
     canCheckOut: canCheckOut,
     checkOut: checkOut,
+    checkOutStyle: checkOutStyle,
   };//close contex
   var viewItemDetailsHTML = viewItemDetailsTemplate(context);
   $("#pageBody").html(viewItemDetailsHTML);
@@ -95,7 +99,7 @@ function displayItem(data){
 }//close displayItem()
 
 function checkOutItem(id){
-  console.log('running check out item');
+  console.log('running check out item')
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/checkOutItem'+'?EQUIPMENT_ID='+id, true);
   xhttp.onload = function(e){afterCheckout(xhttp.responseText,id)};

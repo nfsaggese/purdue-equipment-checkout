@@ -186,7 +186,7 @@ router.get('/updateUser', function(req, res, next) {
 	    var userID = userAuth.getUserID(req.cookies.token);
 
 	    var query = `UPDATE users SET (USERS_FIRSTNAME, USERS_LASTNAME, USERS_EMAIL, USERS_PASSWORD, USERS_PHONE) = ('${fName}', '${lName}', '${email}', '${password}','${phone}') WHERE users_unique_id = ${userID};`;
-	    
+
 	    console.log('get log query: ' + query);
 
 	    client.query(query, function(err, result) {
