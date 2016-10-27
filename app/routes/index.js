@@ -93,8 +93,6 @@ router.post('/getCheckedOutItems', function(req, res, next) {
 		return;
 	    }
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var query = 'insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT, LOG_EQUIPMENTCONDITION) '
-	    + 'values (' + userId  + ',' + equipmentId + ',' + isCheckingOut + ',' + equipmentCond +');';
 	    var query = `select * from log l inner join users u on l.LOG_USERID = u.USERS_UNIQUE_ID
 	    inner join equipment e on e.equipment_unique_id = l.LOG_EQUIPMENTID where
 	    e.equipment_ischeckedout = false and l.LOG_USERID = {$userID};`;
