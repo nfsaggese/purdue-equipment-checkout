@@ -93,9 +93,9 @@ router.post('/getCheckedOutItems', function(req, res, next) {
 		return;
 	    }
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var query = `select * from log l inner join users u on l.LOG_USERID = u.USERS_UNIQUE_ID
+	    var query = `select e.equipment_name from log l inner join users u on l.LOG_USERID = u.USERS_UNIQUE_ID
 	    inner join equipment e on e.equipment_unique_id = l.LOG_EQUIPMENTID where
-	    e.equipment_ischeckedout = false and l.LOG_USERID = ${userID};`;
+	    e.equipment_ischeckedout = true and l.LOG_USERID = ${userID};`;
 
 	    console.log('update log query: ' + query);
 
