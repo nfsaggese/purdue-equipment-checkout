@@ -97,8 +97,6 @@ router.post('/getCheckedOutItems', function(req, res, next) {
 	    inner join equipment e on e.equipment_unique_id = l.LOG_EQUIPMENTID where
 	    e.equipment_ischeckedout = false and l.LOG_USERID = {$userID};`;
 
-	    console.log('userId: ' + userId + '\nequipmentId: ' + equipmentId + '\nisCheckingOut: ' +
-		isCheckingOut + '\nequipmentCond: ' + equipmentCond);
 	    console.log('update log query: ' + query);
 
 	    client.query(query, function(err, result) {
