@@ -50,7 +50,7 @@ function evaluateCookie(data){
 
 - Checkout items in user
   --no response integrated--DONE
-
+  --fixed multi checkout bug
 -view item history from admin inventory views
   -- still isn't working, route is down //view still needs to be built once json is available --done
 -user/admin profile integration
@@ -58,6 +58,7 @@ function evaluateCookie(data){
 --done
 --checkin item
 ---waiting on route for items a user curerntly has out
+  --working
 -admin users view -> view user history
   --tabular view done...individual user view still needs to be finished.-->FINISHED
 
