@@ -9,9 +9,26 @@ $(document).ready(function() {
     if(currentPage == '/user.html'){
       console.log('getting here');
       userGlobalNav();
+      var showing = function(){
+        var id = $(this).parent().attr("itemID");
+        getSingleItem(id);
+      };
+      var checkout = function(){
+        console.log('click listener for checkout fired');
+        var id = $(this).parent().attr("itemID");
+        checkOutItem(id);
+      };
+      $(document).on("click",".inventoryItemTitle, .inventoryItemDetails",showing);
+      //$(".inventoryItemCheckOut").unbind();
+      $(document).on("click",".inventoryItemCheckOut",checkout);
     }else{
       console.log('getting here');
       adminGlobalNav();
+      //trigger to item details page
+      $(document).on("click",".inventoryItemTitle, .inventoryItemDetails", function(){
+        var id = $(this).parent().attr("itemID");
+        getItemHistory(id);
+      });
     }
 });
 function checkCookie(){
@@ -33,7 +50,7 @@ function evaluateCookie(data){
 
 - Checkout items in user
   --no response integrated--DONE
-
+  --fixed multi checkout bug
 -view item history from admin inventory views
   -- still isn't working, route is down //view still needs to be built once json is available --done
 -user/admin profile integration
@@ -41,6 +58,7 @@ function evaluateCookie(data){
 --done
 --checkin item
 ---waiting on route for items a user curerntly has out
+  --working
 -admin users view -> view user history
   --tabular view done...individual user view still needs to be finished.-->FINISHED
 

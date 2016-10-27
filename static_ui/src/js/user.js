@@ -7,6 +7,10 @@ function defaultUserHistoryView(){
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
+function displayCheckedOutItems(data){
+  data = JSON.parse(data);
+  console.log(data);
+}
 function displayUserHistory(data){
   console.log(data);
   data = JSON.parse(data);
@@ -29,8 +33,9 @@ function displayUserHistory(data){
     }//close context
     $('#containerTarget').append(userLogTemplate(context));
   }//close for
-//   var checkin = function(){
-//     console.log('test');
-//   }
-//   $(document).on("click",'div[fieldcontent="checkin"]',checkin)
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("POST", root+'/getCheckedOutItems', true);
+  xhttp.onload = function(e){displayCheckedOutItems(xhttp.responseText)};
+  xhttp.withCredentials = true;
+  xhttp.send(null);
 }

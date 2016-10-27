@@ -1,5 +1,9 @@
+
 var password;
 var isAdmin;
+
+/* function to get the data of the user from the database */
+
 function getData(){
   var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/getUserInfo";
   $.ajax({
@@ -25,6 +29,9 @@ function getData(){
     }
   });
 }
+
+/*function to send data to the server when user clicks submit change button */
+
 function submitChange(){
   var theUrl = "http://ec2-52-42-46-135.us-west-2.compute.amazonaws.com:8080/updateUser?USERS_FIRSTNAME="
   + document.getElementById("fname").value + "&USERS_LASTNAME=" + document.getElementById("lname").value +
@@ -44,6 +51,7 @@ function submitChange(){
   });
 }
 
+/* Switch to the correct page based on the current user if they click cancel button */
 function cancel(){
   if(isAdmin === true){
       window.location = "admin.html";
