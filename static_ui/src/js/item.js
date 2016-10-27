@@ -63,7 +63,7 @@ function displayItem(data){
     }else{
       checkOut = "Not Available";
       canCheckOut = "False";
-      checkOutStyle = "bad-action";
+      checkOutStyle = "bad-action-button";
       return "Out of Stock";
     }
   }//close stock

@@ -149,12 +149,12 @@
   border-radius: 50%;
 }
 .action-button,
-.action-button {
+.bad-action-button {
   box-shadow: 0 4px 2px -2px gray;
   border-radius: 6px;
   color: #fff;
   background: #2980b9;
 }
-.action-button {
+.bad-action-button {
   background: #e74c3c;
 }
