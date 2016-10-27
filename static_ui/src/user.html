@@ -91,11 +91,15 @@
         <div id="containerTarget1" class="container">
           <h2>Items Out</h2>
           <div class="row">
-            <div class="three columns" fieldcontent="userid">Equipment ID</div>
-            <div class="three columns" fieldcontent="date">Date</div>
-            <div class="three columns" fieldcontent="condtion">Condition</div>
-            <div class="three columns" fieldcontent="outin">Is Check Out</div>
+            <div class="three columns" fieldcontent="current-equip-name">Equipment Name</div>
+            <div class="three columns" fieldcontent="current-checkin">Check In</div>
           </div>
+        </div>
+      </script>
+      <script id="user-current-items-log" type="text/x-handlebars-template">
+        <div class="row">
+          <div class="three columns" fieldcontent="current-equip-name">{{name}}</div>
+          <div class="three columns action-button" itemID="{{id}}" fieldcontent="current-checkin">Check In</div>
         </div>
       </script>
       <script id="user-container-log-template" type="text/x-handlebars-template">

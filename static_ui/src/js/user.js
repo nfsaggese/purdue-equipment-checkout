@@ -10,9 +10,17 @@ function defaultUserHistoryView(){
 function displayCheckedOutItems(data){
   data = JSON.parse(data);
   data = data['rows'];
-  var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
-  $('#containerTarget').before(userContainerTemplate);
   console.log(data);
+  var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
+  var userLogTemplate = Handlebars.compile($('#user-current-items-log').html());
+  $('#containerTarget').before(userContainerTemplate);
+  for(var i = 0; i < data.length; i++){
+    var context = {
+      name: data[i]['equipment_name'],
+      id: data[i]['id'],
+    }//close context
+    $('#containerTarget1').append(userLogTemplate(context));
+  }
 }
 function displayUserHistory(data){
   //console.log(data);
