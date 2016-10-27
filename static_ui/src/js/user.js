@@ -11,8 +11,15 @@ function displayCheckedOutItems(data){
   data = JSON.parse(data);
   data = data['rows'];
   var userContainerTemplate = Handlebars.compile($('#user-current-items-head').html());
+  var userLogTemplate = Handlebars.compile($('#user-current-items-log').html());
   $('#containerTarget').before(userContainerTemplate);
-  console.log(data);
+  for(var i = 0; i < data.length; i++){
+    var context = {
+      equipment_id: data[i]['name'],
+      id: data[i]['id'],
+    }//close context
+    $('#containerTarget1').append(userLogTemplate(context));
+  }
 }
 function displayUserHistory(data){
   //console.log(data);
