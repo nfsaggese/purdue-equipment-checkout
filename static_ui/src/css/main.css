@@ -154,6 +154,9 @@
   border-radius: 6px;
   color: #fff;
   background: #2980b9;
+  width: 250px;
+  padding: 10px;
+  text-align: center;
 }
 .bad-action-button {
   background: #e74c3c;
