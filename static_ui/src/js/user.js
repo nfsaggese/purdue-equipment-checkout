@@ -10,13 +10,10 @@ function defaultUserHistoryView(){
 
 function checkin(id){
     var condition = -1;
-    while((condition < 0) || (condition > 10))
+    while((condition !== null)||(condition < 0) || (condition > 10))
       condition = prompt("Checking In: Please describe the condition of this item on a scale 1-10.", "10");
-    if((condition < 0) || (condition > 10)){
-      return checkin(id);
-    }
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id, true);
+    xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id+"&LOG_EQUIPMENTCONDITION="+condition, true);
     xhttp.onload = function(e){defaultUserHistoryView()};
     xhttp.withCredentials = true;
     xhttp.send(null)
