@@ -568,10 +568,12 @@ router.get('/checkInItem', function(req, res, next) {
 	    }
 	    var equipmentID = req.query.EQUIPMENT_ID;
 	    var userID = userAuth.getUserID(req.cookies.token);
+	    var condition = req.query.LOG_EQUIPMENTCONDITION;
 
 	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
 	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID,
-	    LOG_ISCHECKINGOUT) values (${userID}, ${equipmentID}, false);`;
+	    LOG_ISCHECKINGOUT, LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false,
+	    ${condition});`;
 	    console.log(' user login query: ' + query);
 
 	    client.query(query, function(err, result) {
