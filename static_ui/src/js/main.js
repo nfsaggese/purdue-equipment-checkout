@@ -41,6 +41,7 @@ $(document).ready(function() {
             window.location = "user.html";
           }
         };
+        xxhttp.send(null);
       }
       console.log('getting here');
       adminGlobalNav();
