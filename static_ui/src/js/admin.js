@@ -5,6 +5,7 @@ var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*
   xxhttp.open("GET", root+'/getUserAdminLog?USERID=1', true);
   xxhttp.onload = function (e){
     console.log(xxhttp.responseText);
+    console.log(e);
     if(xxhttp.responseText === "invalid cookie"){
       window.location = "user.html";
     }
