@@ -1,6 +1,5 @@
 var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-if(cookieValue){
 
   var xxhttp = new XMLHttpRequest();
   xxhttp.open("GET", root+'/getUserAdminLog?USERID=1', true);
@@ -10,7 +9,6 @@ if(cookieValue){
       window.location = "user.html";
     }
   };
-}
 
 
 function defaultActionsView(){
