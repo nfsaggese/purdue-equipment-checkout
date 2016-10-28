@@ -32,14 +32,15 @@ $(document).ready(function() {
       if(currentPage == '/admin.html'){
         var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         var xxhttp = new XMLHttpRequest();
-        xxhttp.open("GET", root+'/getUserAdminLog?USERID=1', true);
-          xxhttp.onload = function (e){
-            console.log(xxhttp.responseText);
-            console.log(e);
-            if(xxhttp.responseText === "invalid cookie"){
-              window.location = "user.html";
-            }
-          };
+        var address = root+'/getUserAdminLog?USERID=1';
+        xxhttp.open("GET", address, true);
+        xxhttp.onload = function (e){
+          console.log(JSON.parse(xxhttp.responseText));
+          console.log(e);
+          if(JSON.parse(xxhttp.responseText) === "invalid cookie"){
+            window.location = "user.html";
+          }
+        };
       }
       console.log('getting here');
       adminGlobalNav();
