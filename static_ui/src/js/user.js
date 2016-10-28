@@ -51,7 +51,7 @@ function displayUserHistory(data){
     var context = {
       equipment_id: data[i]['log_equipmentid'],
       date: data[i]['log_entrydate'],
-      condition: data[i]['log_equipmentid'],
+      condition: data[i]['log_equipmentcondition'],
       outin: data[i]['log_ischeckingout'],
     }//close context
     $('#containerTarget').append(userLogTemplate(context));

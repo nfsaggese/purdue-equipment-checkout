@@ -160,6 +160,9 @@
   cursor: pointer;
   cursor: hand;
 }
+.row-spacer {
+  margin-top: 5px;
+}
 .bad-action-button {
   background: #e74c3c;
 }
