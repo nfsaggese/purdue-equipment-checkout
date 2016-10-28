@@ -1,5 +1,7 @@
 //USER FUNCTIONS
-function defaultUserProfileView(){}
+function defaultUserProfileView(){
+  alert('test');
+}
 function defaultUserHistoryView(){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getUserLog', true);
@@ -11,7 +13,7 @@ function defaultUserHistoryView(){
 function checkin(id){
     var condition = -1;
     while((condition === null)||(condition < 0) || (condition > 10))
-      condition = prompt("Checking In: Please describe the condition of this item on a scale 1-10.", "10");
+      condition = parseInt(prompt("Checking In: Please describe the condition of this item on a scale 1-10.", "10"));
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id+"&LOG_EQUIPMENTCONDITION="+condition, true);
     xhttp.onload = function(e){defaultUserHistoryView()};

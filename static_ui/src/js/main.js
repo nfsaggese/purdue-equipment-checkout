@@ -7,6 +7,17 @@ $(document).ready(function() {
     console.log(currentPage);
     checkCookie();
     if(currentPage == '/user.html'){
+      var xxhttp = new XMLHttpRequest();
+      var address = root+'/isAdmin';
+      xxhttp.open("GET", address, true);
+      xxhttp.onload = function (e){
+        data = xxhttp.responseText;
+        if(data !== 'invalid cookie'){
+            window.location = "admin.html";
+        }
+      };
+      xxhttp.withCredentials = true;
+      xxhttp.send(null);
       console.log('getting here');
       userGlobalNav();
       var showing = function(){
@@ -30,7 +41,6 @@ $(document).ready(function() {
       $(document).on("click",'div[button="checkin"]',checkinlisten);
     }else{
       if(currentPage == '/admin.html'){
-        var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         var xxhttp = new XMLHttpRequest();
         var address = root+'/isAdmin';
         xxhttp.open("GET", address, true);
@@ -40,6 +50,7 @@ $(document).ready(function() {
             window.location = "user.html";
           }
         };
+  	xxhttp.withCredentials = true;
         xxhttp.send(null);
       }
       console.log('getting here');
