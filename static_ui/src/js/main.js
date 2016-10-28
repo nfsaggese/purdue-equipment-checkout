@@ -35,8 +35,7 @@ $(document).ready(function() {
         var address = root+'/getUserAdminLog?USERID=1';
         xxhttp.open("GET", address, true);
         xxhttp.onload = function (e){
-          console.log(JSON.parse(xxhttp.responseText));
-          console.log(e);
+          console.log(xxhttp.responseText);
           if(JSON.parse(xxhttp.responseText) === "invalid cookie"){
             window.location = "user.html";
           }
