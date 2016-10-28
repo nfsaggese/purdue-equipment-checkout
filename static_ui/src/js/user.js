@@ -7,6 +7,16 @@ function defaultUserHistoryView(){
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
+
+function checkin(id){
+    var condition = prompt("Checking In: Please describe the condition of this item on a scale 1-10.", "10");
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id, true);
+    xhttp.onload = function(e){defaultUserHistoryView()};
+    xhttp.withCredentials = true;
+    xhttp.send(null)
+}
+
 function displayCheckedOutItems(data){
   data = JSON.parse(data);
   data = data['rows'];
@@ -17,10 +27,12 @@ function displayCheckedOutItems(data){
   for(var i = 0; i < data.length; i++){
     var context = {
       name: data[i]['equipment_name'],
-      id: data[i]['id'],
+      id: data[i]['equipment_unique_id'],
     }//close context
     $('#containerTarget1').append(userLogTemplate(context));
   }
+
+  var person = prompt("Please enter your name", "Harry Potter");
 }
 function displayUserHistory(data){
   //console.log(data);
@@ -32,7 +44,7 @@ function displayUserHistory(data){
      $('#pageBody').html('<h1>This user has no history.</h1>');
      return;
   }
-  var userContainerTemplate = Handlebars.compile($('#user-container-log-template').html());
+  var userContainerTemplate = Handlebars.compCareerile($('#user-container-log-template').html());
   var userLogTemplate = Handlebars.compile($('#user-log-template').html());
   $('#pageBody').html(userContainerTemplate);
   for(var i = 0; i < data.length; i++){

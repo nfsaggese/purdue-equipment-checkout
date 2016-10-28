@@ -18,9 +18,16 @@ $(document).ready(function() {
         var id = $(this).parent().attr("itemID");
         checkOutItem(id);
       };
+
+      var checkin = function(){
+        var id = $(this).attr("itemID");
+        checkin(id);
+      }
+
       $(document).on("click",".inventoryItemTitle, .inventoryItemDetails",showing);
       //$(".inventoryItemCheckOut").unbind();
       $(document).on("click",".inventoryItemCheckOut",checkout);
+      $(document).on("click","div[button="checkin"]",checkin);
     }else{
       console.log('getting here');
       adminGlobalNav();
