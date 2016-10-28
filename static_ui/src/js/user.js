@@ -44,7 +44,7 @@ function displayUserHistory(data){
      $('#pageBody').html('<h1>This user has no history.</h1>');
      return;
   }
-  var userContainerTemplate = Handlebars.compCareerile($('#user-container-log-template').html());
+  var userContainerTemplate = Handlebars.compile($('#user-container-log-template').html());
   var userLogTemplate = Handlebars.compile($('#user-log-template').html());
   $('#pageBody').html(userContainerTemplate);
   for(var i = 0; i < data.length; i++){
