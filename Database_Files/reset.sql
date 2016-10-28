@@ -28,7 +28,7 @@ CREATE TABLE EQUIPMENT(
   USERS_USERNAME varchar not null,
   USERS_PASSWORD varchar not null,
   USERS_PHONE bigint,
-  USERS_EMAIL varchar,
+  USERS_EMAIL varchar not null,
   USERS_SECRETQUESTION varchar,
   USERS_SECRETANSWER varchar,
    
