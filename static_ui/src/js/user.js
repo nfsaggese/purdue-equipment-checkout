@@ -1,5 +1,7 @@
 //USER FUNCTIONS
-function defaultUserProfileView(){}
+function defaultUserProfileView(){
+  alert('test');
+}
 function defaultUserHistoryView(){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getUserLog', true);
