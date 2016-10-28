@@ -1,14 +1,3 @@
-if(document.cookie.token){
-  var xxhttp = new XMLHttpRequest();
-  xxhttp.open("GET", root+'/getUserAdminLogin?USERID=1', true);
-  xxhttp.onload = function (e){
-    console.log(xxhttp.responseText);
-    if(xxhttp.responseText === "invalid cookie"){
-      window.location = "user.html";
-    }
-  };
-}
-
 
 function defaultActionsView(){
   adminActionsPageNav();
