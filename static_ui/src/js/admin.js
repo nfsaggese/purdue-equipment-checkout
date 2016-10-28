@@ -3,7 +3,7 @@ var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*
 if(cookieValue){
 
   var xxhttp = new XMLHttpRequest();
-  xxhttp.open("GET", root+'/getUserAdminLogin?USERID=1', true);
+  xxhttp.open("GET", root+'/getUserAdminLog?USERID=1', true);
   xxhttp.onload = function (e){
     console.log(xxhttp.responseText);
     if(xxhttp.responseText === "invalid cookie"){
