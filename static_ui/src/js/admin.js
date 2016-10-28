@@ -123,6 +123,10 @@ function displayAdminUserLog(data){
   clearBottom();
   data = JSON.parse(data);
   var userData = data['rows'];
+  if(userData.length == 0){
+    $('#pageBody').html('<h1>This item has no history.</h1>');
+    return;
+  }
   var baseTemplate = Handlebars.compile($('#admin-users-container-log-template').html());
   $('#pageBody').html(baseTemplate);
   var adminUserIndividualTemplate = Handlebars.compile($('#admin-users-log-template').html());
