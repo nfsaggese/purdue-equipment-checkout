@@ -544,6 +544,33 @@ router.get('/checkInItem', function(req, res, next) {
 	    var userID = userAuth.getUserID(req.cookies.token);
 
 	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
+	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID,
+	    LOG_ISCHECKINGOUT) values (${userID}, ${equipmentID}, false);`;
+	    console.log(' user login query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: verifyUser', err);
+		}
+		});
+	});
+});
+/*router.get('/checkInItem', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if(!userAuth.checkUserAlive(req.cookies.token)){
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var equipmentID = req.query.EQUIPMENT_ID;
+	    var userID = userAuth.getUserID(req.cookies.token);
+
+	    var query = `UPDATE equipment SET EQUIPMENT_ISCHECKEDOUT = false WHERE
 	    equipment_unique_id = ${equipmentID}; insert into log (LOG_USERID, LOG_EQUIPMENTID, LOG_ISCHECKINGOUT,LOG_EQUIPMENTCONDITION) values (${userID}, ${equipmentID}, false);`;
 	    console.log(' user login query: ' + query);
 
@@ -556,7 +583,7 @@ router.get('/checkInItem', function(req, res, next) {
 		});
 	});
 });
-
+*/
 //Get all inventory
 router.get('/allInventory', function(req, res, next){
 	global.postPool.connect(function(err, client, done) {
