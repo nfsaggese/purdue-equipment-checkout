@@ -228,6 +228,32 @@ router.get('/getDeviceLog', function(req, res, next) {
 	    });
 	});
 
+router.get('/isAdmin', function(req, res, next) {
+	global.postPool.connect(function(err, client, done) {
+	    if(err) {
+	    return console.error('error fetching client from pool', err);
+	    }
+	    if((!userAuth.checkUserAlive(req.cookies.token)) ||
+		(userAuth.checkUserAdmin(req.cookies.token) == false)) {
+		res.send('invalid cookie');
+		done();
+		return;
+	    }
+	    var userID = userAuth.getUserID(req.cookies.token);
+	    var query = `select users_firstname, users_email from users where USERS_ISADMIN = 't'
+	    and USERS_UNIQUE_ID = ${userID};`;
+
+	    console.log('get log query: ' + query);
+
+	    client.query(query, function(err, result) {
+		res.send(JSON.stringify(result, null, 2));
+		done();
+		if(err) {
+		return console.error('error running query: updateLog', err);
+		}
+		});
+	    });
+	});
 router.get('/getUserAdminLog', function(req, res, next) {
 	global.postPool.connect(function(err, client, done) {
 	    if(err) {
