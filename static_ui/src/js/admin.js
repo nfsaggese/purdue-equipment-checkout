@@ -1,4 +1,7 @@
-if(document.cookie.token){
+var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+
+if(cookieValue){
+
   var xxhttp = new XMLHttpRequest();
   xxhttp.open("GET", root+'/getUserAdminLogin?USERID=1', true);
   xxhttp.onload = function (e){
