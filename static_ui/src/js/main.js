@@ -36,7 +36,7 @@ $(document).ready(function() {
         xxhttp.open("GET", address, true);
         xxhttp.onload = function (e){
           console.log(xxhttp.responseText);
-          if(xxhttp.responseText === "invalid cookie"){
+          if(xxhttp.responseText == "invalid cookie"){
             window.location = "user.html";
           }
         };
