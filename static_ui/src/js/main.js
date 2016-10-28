@@ -19,7 +19,7 @@ $(document).ready(function() {
         checkOutItem(id);
       };
 
-      var checkin = function(){
+      var checkinlisten = function(){
         var id = $(this).attr("itemID");
         checkin(id);
       };
@@ -27,7 +27,7 @@ $(document).ready(function() {
       $(document).on("click",".inventoryItemTitle, .inventoryItemDetails",showing);
       //$(".inventoryItemCheckOut").unbind();
       $(document).on("click",".inventoryItemCheckOut",checkout);
-      $(document).on("click",'div[button="checkin"]',checkin);
+      $(document).on("click",'div[button="checkin"]',checkinlisten);
     }else{
       console.log('getting here');
       adminGlobalNav();
