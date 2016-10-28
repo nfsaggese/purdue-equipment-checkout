@@ -13,7 +13,7 @@ function checkin(id){
     while((condition !== null)||(condition < 0) || (condition > 10))
       condition = prompt("Checking In: Please describe the condition of this item on a scale 1-10.", "10");
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id, true);
+    xhttp.open("GET", root+'/checkInItem?EQUIPMENT_ID='+id+"&LOG_EQUIPMENTCONDITION="+condition, true);
     xhttp.onload = function(e){defaultUserHistoryView()};
     xhttp.withCredentials = true;
     xhttp.send(null)
