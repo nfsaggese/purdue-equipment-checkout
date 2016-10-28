@@ -29,6 +29,18 @@ $(document).ready(function() {
       $(document).on("click",".inventoryItemCheckOut",checkout);
       $(document).on("click",'div[button="checkin"]',checkinlisten);
     }else{
+      if(currentPage == '/admin.html'){
+        var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        var xxhttp = new XMLHttpRequest();
+        xxhttp.open("GET", root+'/getUserAdminLog?USERID=1', true);
+          xxhttp.onload = function (e){
+            console.log(xxhttp.responseText);
+            console.log(e);
+            if(xxhttp.responseText === "invalid cookie"){
+              window.location = "user.html";
+            }
+          };
+      }
       console.log('getting here');
       adminGlobalNav();
       //trigger to item details page
