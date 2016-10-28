@@ -32,11 +32,11 @@ $(document).ready(function() {
       if(currentPage == '/admin.html'){
         var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
         var xxhttp = new XMLHttpRequest();
-        var address = root+'/getUserAdminLog?USERID=1';
+        var address = root+'/isAdmin';
         xxhttp.open("GET", address, true);
         xxhttp.onload = function (e){
-          data = JSON.parse(xxhttp.responseText);
-          if(data == false){
+          data = xxhttp.responseText;
+          if(data === 'invalid cookie'){
             window.location = "user.html";
           }
         };
