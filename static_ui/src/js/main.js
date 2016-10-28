@@ -40,6 +40,7 @@ $(document).ready(function() {
             window.location = "user.html";
           }
         };
+  	xxhttp.withCredentials = true;
         xxhttp.send(null);
       }
       console.log('getting here');
