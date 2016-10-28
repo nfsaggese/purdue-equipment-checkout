@@ -31,8 +31,6 @@ function displayCheckedOutItems(data){
     }//close context
     $('#containerTarget1').append(userLogTemplate(context));
   }
-
-  var person = prompt("Please enter your name", "Harry Potter");
 }
 function displayUserHistory(data){
   //console.log(data);
