@@ -29,7 +29,7 @@ function checkAllInputs(){
     alert("Invalid field");
     return false;
   }
-  else if(validateEmail(document.getElementById("email").value)){
+  else if(!validateEmail(document.getElementById("email").value)){
     alert("Invalid email");
     return false;
   }
@@ -37,7 +37,7 @@ function checkAllInputs(){
     alert("Invalid phone number");
     return false;
   }
-  else if(validateLetters(document.getElementById("first name").value) || validateLetters(document.getElementById("last name").value)){
+  else if(!validateLetters(document.getElementById("first name").value) || !validateLetters(document.getElementById("last name").value)){
     alert("Invalid name");
     return false
   }
