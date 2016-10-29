@@ -29,15 +29,15 @@ function checkAllInputs(){
     alert("Invalid field");
     return false;
   }
-  if(validateEmail(document.getElementById("email").value)){
+  else if(validateEmail(document.getElementById("email").value)){
     alert("Invalid email");
     return false;
   }
-  if(validateNumber(document.getElementById("number").value)){
+  else if(validateNumber(document.getElementById("number").value)){
     alert("Invalid phone number");
     return false;
   }
-  if(validateLetters(document.getElementById("first name").value) || validateLetters(document.getElementById("last name").value)){
+  else if(validateLetters(document.getElementById("first name").value) || validateLetters(document.getElementById("last name").value)){
     alert("Invalid name");
     return false
   }
