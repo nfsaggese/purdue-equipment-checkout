@@ -296,7 +296,8 @@ router.get('/getUserLog', function(req, res, next) {
 		return;
 	    }
 	    var userID = userAuth.getUserID(req.cookies.token);
-	    var query = `Select * from log where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
+	    var query = `Select * from log inner join equipment on
+	    EQUIPMENT_UNIQUE_ID = LOG_EQUIPMENTID  where LOG_USERID = ${userID} order by LOG_ENTRYID;`;
 
 	    console.log('get log query: ' + query);
 
