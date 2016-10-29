@@ -7,13 +7,14 @@ function getSingleItem(id){
   xhttp.send(null);//dmin.htmlonly in use on post requests
 }
 
-function getItemHistory(id){//TODO WORKING ON THIS
+function getItemHistory(id){
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getDeviceLog'+'?deviceID='+id, true);
   xhttp.onload = function(e){displayItemHistory(xhttp.responseText,id)};
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
+
 function displayItemHistory(data,id){
     data = JSON.parse(data);
     console.log(data);
@@ -39,6 +40,7 @@ function displayItemHistory(data,id){
       $('#containerTarget').append(adminEquipmentLog(context));
       $('#containerTarget').prepend('<h3>Device ID: ' + String(id) + '</h3>');
     }//close for
+}//close function
 
 function displayItem(data){
   console.log('display item');
