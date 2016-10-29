@@ -37,9 +37,8 @@ function displayItemHistory(data,id){
       }//close context
 
       $('#containerTarget').append(adminEquipmentLog(context));
-      $('#containerTarget').prepend('<h3>Device ID: ' + id + '</h3>');
+      $('#containerTarget').prepend('<h3>Device ID: ' + String(id) + '</h3>');
     }//close for
-}
 
 function displayItem(data){
   console.log('display item');
