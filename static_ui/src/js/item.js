@@ -22,7 +22,7 @@ function displayItemHistory(data,id){
     console.log(typeof(log));
     clearBottom();
     if(log.length == 0){
-       $('#pageBody').html('<h3>This item has no history.</h1>');
+       $('#pageBody').html('<h3>Device ID: ' + String(id) + '</h3></br><i>This item has no history.</i>');
        return;
     }
     var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
