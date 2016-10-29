@@ -1,7 +1,7 @@
 //USER FUNCTIONS
 function defaultUserProfileView(){
   clearBottom();
-  $('#pageBody').html('<iframe src="/profile.html"></iframe>');
+  $('#pageBody').html('<iframe frameBorder="0" onload="this.width=screen.width;this.height=screen.height; src="/profile.html"></iframe>');
 }
 function defaultUserHistoryView(){
   var xhttp = new XMLHttpRequest();
