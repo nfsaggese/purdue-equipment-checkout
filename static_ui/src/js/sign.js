@@ -33,7 +33,7 @@ function checkAllInputs(){
     alert("Invalid email");
     return false;
   }
-  else if(validateNumber(document.getElementById("number").value)){
+  else if(!validateNumber(document.getElementById("number").value)){
     alert("Invalid phone number");
     return false;
   }
