@@ -52,7 +52,7 @@ function displayUserHistory(data){
   $('#pageBody').html(userContainerTemplate);
   for(var i = 0; i < data.length; i++){
     var context = {
-      equipment_id: data[i]['equipment_name'],
+      equipment_name: data[i]['equipment_name'],
       date: data[i]['log_entrydate'],
       condition: data[i]['log_equipmentcondition'],
       outin: data[i]['log_ischeckingout'],
