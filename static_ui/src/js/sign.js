@@ -19,7 +19,7 @@ function validateNumber(number) {
     return /^[0-9]+$/.test(number);
 }
 
-function validateLetters(number) {
+function validateLetters(str) {
     return /^[a-zA-Z]+$/.test(str);
 }
 function checkAllInputs(){
