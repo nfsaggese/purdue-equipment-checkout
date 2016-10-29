@@ -23,7 +23,7 @@ function displayItemHistory(data,id){
     console.log(typeof(log));
     clearBottom();
     if(log.length == 0){
-       $('#pageBody').html('<h3>Device ID: ' + String(id) + '</h3></br><i>This item has no history.</i>');
+       $('#pageBody').html('<div class="container"><h3>Device ID: ' + String(id) + '</h3></br><i>This item has no history.</i></div>');
        return;
     }
     var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
