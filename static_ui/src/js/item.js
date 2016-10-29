@@ -10,11 +10,11 @@ function getSingleItem(id){
 function getItemHistory(id){//TODO WORKING ON THIS
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", root+'/getDeviceLog'+'?deviceID='+id, true);
-  xhttp.onload = function(e){displayItemHistory(xhttp.responseText)};
+  xhttp.onload = function(e){displayItemHistory(xhttp.responseText,id)};
   xhttp.withCredentials = true;
   xhttp.send(null);
 }
-function displayItemHistory(data){
+function displayItemHistory(data,id){
     data = JSON.parse(data);
     console.log(data);
     var log = data['rows'];
@@ -22,7 +22,7 @@ function displayItemHistory(data){
     console.log(typeof(log));
     clearBottom();
     if(log.length == 0){
-       $('#pageBody').html('<h1>This item has no history.</h1>');
+       $('#pageBody').html('<h3>This item has no history.</h1>');
        return;
     }
     var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
@@ -37,6 +37,7 @@ function displayItemHistory(data){
       }//close context
 
       $('#containerTarget').append(adminEquipmentLog(context));
+      $('#containerTarget').prepend('<h3>Device ID: ' + id + '</h3>');
     }//close for
 }
 

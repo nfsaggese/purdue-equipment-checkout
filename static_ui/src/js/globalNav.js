@@ -43,7 +43,7 @@ function adminGlobalNav(){
   $("[adminGlobalNavlistener='users']").click(function(){
     defaultAdminUsersView();
   });
-  $("[adminGlobalNavlistener='PROFILE']").click(function(){
+  $("[adminGlobalNavlistener='profile']").click(function(){
     defaultAdminProfileView();
   });
 }
