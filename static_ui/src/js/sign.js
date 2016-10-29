@@ -60,8 +60,12 @@ function submitLogin(){
     crossDomain: true,
     success: function(data){
       console.log(data);
-      alert("Account successfully created, please login!");
-      window.location = "index.html";
+      if(data === "invalid cookie"){
+        alert("Email already registered");
+      }else{
+        alert("Account successfully created, please login!");
+        window.location = "index.html";
+      }
     },
     error: function(){
       console.log("Error");
