@@ -10,12 +10,36 @@ function checkPassword(){
   }
 }
 
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function validateNumber(number) {
+    return /^\d+$/.test(number);
+}
+
+function validateLetters(number) {
+    return /^[a-zA-Z]+$/.test(str);
+}
 function checkAllInputs(){
   if(document.getElementById("first name").value === "" || document.getElementById("last name").value === "" ||
   document.getElementById("email").value === "" || document.getElementById("number").value === "" ||
   document.getElementById("password").value === "" || document.getElementById("confirm password").value === ""){
     alert("Invalid field");
     return false;
+  }
+  if(validateEmail(document.getElementById("email").value)){
+    alert("Invalid email");
+    return false;
+  }
+  if(validateNumber(document.getElementById("number").value)){
+    alert("Invalid phone number");
+    return false;
+  }
+  if(validateLetters(document.getElementById("first name").value) || validateLetters(document.getElementById("last name").value)){
+    alert("Invalid name");
+    return false
   }
   else{
     return true;
