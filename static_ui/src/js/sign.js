@@ -16,7 +16,7 @@ function validateEmail(email) {
 }
 
 function validateNumber(number) {
-    return /^\d+$/.test(number);
+    return /^[0-9]+$/.test(number);
 }
 
 function validateLetters(number) {
