@@ -142,4 +142,7 @@ function displayAdminUserLog(data){
   }
 }
 /////////////////////PROFILE
-function defaultAdminProfileView(){}//TODO
+function defaultAdminProfileView(){
+  clearBottom();
+  $('#pageBody').html('<iframe frameBorder="0" onload="this.width=screen.width;this.height=screen.height"; src="/profile.html"></iframe>');
+}

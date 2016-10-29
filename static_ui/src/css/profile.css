@@ -23,7 +23,7 @@ label {
 .info {
     *zoom: 1;
 }
-:focus {
+profile:focus {
   outline: 0;
 }
 #profile{
@@ -37,7 +37,7 @@ label {
   overflow: hidden;
 }
 
-.nav-button{
+.provile-button{
   text-align:center;
   margin-top: -10px;
 }
