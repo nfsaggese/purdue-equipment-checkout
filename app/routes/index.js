@@ -542,7 +542,7 @@ router.get('/loginAdmin', function(req, res, next) {
             if(err) {
                 return console.error('error fetching client from pool', err);
             }
-            client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment WHERE EQUIPMENT_ISACTIVE = true;', function(err, result) {
+            client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment;', function(err, result) {
 //call `done()` to release the client back to the pool
                 console.log('Cookies: ', req.cookies);
                 res.send(JSON.stringify(result, null, 2));
@@ -699,7 +699,7 @@ router.get('/getAvailableInventory', function(req, res, next){
             done();
             return;
         }
-        var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false`;
+        var queryURL = `Select * from EQUIPMENT where EQUIPMENT_ISCHECKEDOUT = false and EQUIPMENT_ISACTIVE = true`;
 
         client.query(queryURL, function(err, result) {
             res.send(JSON.stringify(result, null,2));
