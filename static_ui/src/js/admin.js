@@ -58,6 +58,7 @@ function adminActionsRetireView(){
     var data = {"EQUIPMENT_UNIQUE_ID":equipment_unique_id,};
     data = JSON.stringify();//ready for more secure post
     var url = root + "/retireItem?" + "EQUIPMENT_UNIQUE_ID=" + equipment_unique_id;
+    var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
     xhttp.onload = function(e){refreshAdminActionsRetireView(data,status)};
     xhttp.withCredentials = true;

@@ -16,10 +16,10 @@ function validateEmail(email) {
 }
 
 function validateNumber(number) {
-    return /^\d+$/.test(number);
+    return /^[0-9]+$/.test(number);
 }
 
-function validateLetters(number) {
+function validateLetters(str) {
     return /^[a-zA-Z]+$/.test(str);
 }
 function checkAllInputs(){
@@ -29,15 +29,15 @@ function checkAllInputs(){
     alert("Invalid field");
     return false;
   }
-  else if(validateEmail(document.getElementById("email").value)){
+  else if(!validateEmail(document.getElementById("email").value)){
     alert("Invalid email");
     return false;
   }
-  else if(validateNumber(document.getElementById("number").value)){
+  else if(!validateNumber(document.getElementById("number").value)){
     alert("Invalid phone number");
     return false;
   }
-  else if(validateLetters(document.getElementById("first name").value) || validateLetters(document.getElementById("last name").value)){
+  else if(!validateLetters(document.getElementById("first name").value) || !validateLetters(document.getElementById("last name").value)){
     alert("Invalid name");
     return false
   }
@@ -60,8 +60,12 @@ function submitLogin(){
     crossDomain: true,
     success: function(data){
       console.log(data);
-      alert("Account successfully created, please login!");
-      window.location = "index.html";
+      if(data === "invalid cookie"){
+        alert("Email already registered");
+      }else{
+        alert("Account successfully created, please login!");
+        window.location = "index.html";
+      }
     },
     error: function(){
       console.log("Error");

@@ -6,7 +6,7 @@ $(document).ready(function() {
     var currentPage = window.location.pathname;
     console.log(currentPage);
     checkCookie();
-    $('#logo').alert("Credits: Nick Saggese, Andrew Chen, Hongda Zeng, Jack Han, Brian Chan");
+    $(document).on("click",'#logo',function(){alert("Credits: Nick Saggese, Andrew Chen, Hongda Zeng, Jack Han, Brian Chan")});
     if(currentPage == '/user.html'){
       var xxhttp = new XMLHttpRequest();
       var address = root+'/isAdmin';
