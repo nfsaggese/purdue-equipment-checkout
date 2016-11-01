@@ -29,6 +29,7 @@ function displayItemHistory(data,id){
     var adminEquipmentContainerLogTemplate = Handlebars.compile($('#admin-equipment-container-log-template').html());
     var adminEquipmentLog = Handlebars.compile($('#admin-equipment-log-template').html());
     $('#pageBody').html(adminEquipmentContainerLogTemplate);
+    $('#containerTarget').prepend('<h3>Device ID: ' + String(id) + '</h3>');
     for(var i = 0; i < log.length; i++){
       var context = {
         userid: log[i]['log_userid'],
@@ -38,7 +39,6 @@ function displayItemHistory(data,id){
       }//close context
 
       $('#containerTarget').append(adminEquipmentLog(context));
-      $('#containerTarget').prepend('<h3>Device ID: ' + String(id) + '</h3>');
     }//close for
 }//close function
 
