@@ -542,7 +542,7 @@ router.get('/loginAdmin', function(req, res, next) {
             if(err) {
                 return console.error('error fetching client from pool', err);
             }
-            client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment;', function(err, result) {
+            client.query('select equipment_unique_id, equipment_name, EQUIPMENT_ISCHECKEDOUT from equipment WHERE EQUIPMENT_ISACTIVE = false;', function(err, result) {
 //call `done()` to release the client back to the pool
                 console.log('Cookies: ', req.cookies);
                 res.send(JSON.stringify(result, null, 2));
