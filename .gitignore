@@ -1,2 +1,4 @@
 connectToAws.sh
 purdue-electronic-checkout-bugless.zip
+updateServer.sh
+PECdev.pem
